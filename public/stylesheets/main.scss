@@ -1,0 +1,123 @@
+$gray100: #EEF0F6;
+$gray200: #DCDFEA;
+$gray300: #C8CDDA;
+$gray400: #B7BDCC;
+$gray500: #A7ABBE;
+$gray600: #8A90A8;
+$gray700: #686E84;
+$gray800: #52576B;
+$gray900: #454854;
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Space Grotesk", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, a, p {
+  margin: 0;
+  padding: 0;
+}
+
+.card {
+  max-width: 48rem;
+  padding: 2rem 3rem;
+  background: $gray100;
+  border-radius: 0.25rem;
+  &--icon {
+    height: 3rem;
+    width: 3rem;
+    background: $gray200;
+    border-radius: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    path {
+      fill: $gray600;
+    }
+  }
+  h1 {
+    margin-top: 1rem;
+    color: $gray900;
+  }
+  p {
+    margin-top: 0.5rem;
+    line-height: 150%;
+    color: $gray800;
+  }
+  .button-container {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: flex-end;
+    a.button {
+      margin-left: 1rem;
+    }
+  }
+  span.underline {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+  }
+}
+
+a.button {
+  display: block;
+  padding: 0.75rem 2rem;
+  border-radius: 0.25rem;
+  background: $gray200;
+  color: $gray800;
+  font-weight: 600;
+  text-decoration: none;
+  &--primary {
+    background: $gray500;
+    color: black;
+    &.button--hover {
+      background: $gray400;
+    }
+  }
+  &--secondary {
+    &.button--hover {
+      color: $gray700;
+    }
+  }
+}
+
+.palette-container {
+  display: flex;
+}
+
+.color {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  height: 12rem;
+  width: 8rem;
+  padding: 1rem;
+  box-sizing: border-box;
+  input {
+    text-align: right;
+    width: 6ch;
+    padding: 0.5rem;
+    appearance: textfield;
+    -webkit-appearance: textfield;
+    border: none;
+    background: transparent;
+    font-family: "Iosevka", monospace;
+    &.warning {
+      border: 1px solid red;
+    }
+    &.dragged {
+      user-select: none;
+      -webkit-user-select: none;
+      caret-color: transparent !important;
+      cursor: e-resize;
+    }
+  }
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
