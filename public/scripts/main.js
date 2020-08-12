@@ -14,47 +14,56 @@ const store = new Vuex.Store({
         100: {
           hue: 141,
           saturation: 100,
-          lightness: 95
+          lightness: 95,
+          hidden: false
         },
         200: {
           hue: 141,
           saturation: 77,
-          lightness: 88
+          lightness: 88,
+          hidden: false
         },
         300: {
           hue: 141,
           saturation: 80,
-          lightness: 71
+          lightness: 71,
+          hidden: false
         },
         400: {
           hue: 141,
           saturation: 75,
-          lightness: 65
+          lightness: 65,
+          hidden: false
         },
         500: {
           hue: 141,
           saturation: 75,
-          lightness: 48
+          lightness: 48,
+          hidden: false
         },
         600: {
           hue: 141,
           saturation: 77,
-          lightness: 38
+          lightness: 38,
+          hidden: false
         },
         700: {
           hue: 130,
           saturation: 44,
-          lightness: 32
+          lightness: 32,
+          hidden: false
         },
         800: {
           hue: 104,
           saturation: 70,
-          lightness: 19
+          lightness: 19,
+          hidden: false
         },
         900: {
           hue: 108,
           saturation: 92,
-          lightness: 12
+          lightness: 12,
+          hidden: false
         }
       }
     },
@@ -95,6 +104,9 @@ const store = new Vuex.Store({
       if (state.clipboard !== null) {
         state.palettes[state.currentlySelectedShade.name][state.currentlySelectedShade.shade] = JSON.parse(state.clipboard)
       }
+    },
+    toggleVisibility (state, { name, shade }) {
+      state.palettes[name][shade].hidden = !state.palettes[name][shade].hidden
     }
   }
 })
@@ -108,7 +120,7 @@ const app = new Vue({
   },
   methods: {
     shadeToHSL (shade) {
-      return `hsl(${this.currentPalette[shade].hue}deg, ${this.currentPalette[shade].saturation}%, ${this.currentPalette[shade].lightness}%)`
+      return this.currentPalette[shade].hidden ? 'transparent' : `hsl(${this.currentPalette[shade].hue}deg, ${this.currentPalette[shade].saturation}%, ${this.currentPalette[shade].lightness}%)`
     },
     setUndoState () {
       this.$store.commit('setUndoState')
