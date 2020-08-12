@@ -42,6 +42,7 @@ h1, h2, h3, h4, h5, h6, a, p {
   }
   p {
     margin-top: 0.5rem;
+    font-size: 1.25rem;
     line-height: 150%;
     color: $gray800;
   }
@@ -86,14 +87,30 @@ a.button {
 }
 
 .color {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: flex-end;
+  
   height: 12rem;
   width: 8rem;
-  padding: 1rem;
+  padding: 0.5rem;
   box-sizing: border-box;
+  cursor: pointer;
+  .color__inner {
+    height: 11rem;
+    width: 7rem;
+    margin: 0.5rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    box-sizing: border-box;
+  }
+  &.selected .color__inner {
+    box-sizing: border-box;
+    padding: 0.25rem;
+    margin: 0rem;
+    border: 0.25rem solid white;
+    border-radius: 0.5rem;
+  }
   input {
     text-align: right;
     width: 6ch;
@@ -116,8 +133,10 @@ a.button {
 }
 
 #app {
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 2rem;
 }

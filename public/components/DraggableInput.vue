@@ -22,9 +22,6 @@ export default {
         this.dragged = true
       }
     },
-    setValue (value) {
-      
-    },
     startDrag (e) {
       this.temp = this.value
       this.mouseX = e.x
@@ -39,6 +36,7 @@ export default {
       document.body.removeEventListener('mouseup', this.endDrag)
       document.body.removeEventListener('mouseleave', this.endDrag)
       console.log(e)
+      this.$store.commit('setUndoState')
     }
   },
   computed: {
