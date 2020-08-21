@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/public/stylesheets/main.scss">
+  <link rel="stylesheet" href="/public/fonts/space-grotesk.css">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app" @click="unsetSelectedShadeIfNotClickingShade">
+    <div class="stage">
+      <div class="card" :style="{background: shadeToHSL(100)}">
+      <div class="card--icon" :style="{background: shadeToHSL(200)}">
+        <svg id="book" width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M21.5 18H6.5C6.23478 18 5.98043 18.1054 5.79289 18.2929C5.60536 18.4804 5.5 18.7348 5.5 19C5.5 19.2652 5.60536 19.5196 5.79289 19.7071C5.98043 19.8946 6.23478 20 6.5 20H21.5V22H6.5C5.70435 22 4.94129 21.6839 4.37868 21.1213C3.81607 20.5587 3.5 19.7956 3.5 19V4C3.5 3.46957 3.71071 2.96086 4.08579 2.58579C4.46086 2.21071 4.96957 2 5.5 2H21.5V18ZM16.5 9V7H8.5V9H16.5Z" :style="{fill: shadeToHSL(600)}"/>
+          </svg>        
+        </div>
+        <h1 :style="{color: shadeToHSL(900)}">The series of the century is going <span class="underline" :style="{background: shadeToHSL(300)}">back to basics.</span></h1>
+        <p :style="{color: shadeToHSL(800)}">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ut tincidunt nulla, eget tempor sapien. In velit ligula, dignissim sit amet lacus eu, bibendum laoreet erat. Aliquam scelerisque venenatis odio eget cursus. Aenean nec libero vestibulum, rhoncus elit nec, hendrerit libero.</p>
+        <div class="mock-button-container">
+          <a href="#" class="mock-button mock-button--secondary" role="button" :style="{background: shadeToHSL(200), color: shadeToHSL(700)}">Learn More</a>
+          <a href="#" class="mock-button mock-button--primary" role="button" :style="{background: shadeToHSL(500)}">Purchase</a>
+        </div>
+        <div class="mock-button-container">
+          <a href="#" class="mock-button mock-button--secondary mock-button--hover" role="button" :style="{background: shadeToHSL(200), color: shadeToHSL(600)}">Learn More</a>
+          <a href="#" class="mock-button mock-button--primary mock-button--hover" role="button" :style="{background: shadeToHSL(400)}">Purchase</a>
+        </div>
+      </div>
+      <div class="palette" v-on:click.stop>
+        <div class="palette-info">
+          <h1 class="palette__name">Green</h1>
+          <div class="palette__attributes">
+            <h2 class="palette__attribute">Hue</h2>
+            <h2 class="palette__attribute">Saturation</h2>
+            <h2 class="palette__attribute">Brightness</h2>
+          </div>
+        </div>
+        <Color name="green" shade="100"></Color>
+        <Color name="green" shade="200"></Color>
+        <Color name="green" shade="300"></Color>
+        <Color name="green" shade="400"></Color>
+        <Color name="green" shade="500"></Color>
+        <Color name="green" shade="600"></Color>
+        <Color name="green" shade="700"></Color>
+        <Color name="green" shade="800"></Color>
+        <Color name="green" shade="900"></Color>
+      </div>
+    </div>
+    <footer class="nav-footer">
+      <div class="footer-container">
+        <div>
+          <img src="/public/images/icons/logo--tentative.svg" alt="" class="logo">
+          <div class="button-group">
+            <a @click="undo" class="button" role="button" v-on:click.stop>
+              include /public/images/icons/Undo.svg
+              <span>Undo</span>
+            </a>
+            <a @click="redo" class="button" role="button" v-on:click.stop>
+              include /public/images/icons/Redo.svg
+              <span>Redo</span>
+            </a>
+          </div>
+          <div class="button-group">
+            <a @click="copy" :class="{button: true, 'button--disabled': currentlySelectedShade === null}" role="button" v-on:click.stop>
+              include /public/images/icons/Copy.svg
+              <span>Copy</span>
+            </a>
+            <a @click="paste" :class="{button: true, 'button--disabled': currentlySelectedShade === null}" role="button" v-on:click.stop>
+              include /public/images/icons/Paste.svg
+              <span>Paste</span>
+            </a>
+            <a @click="toggleVisibility" :class="{button: true, 'button--disabled': currentlySelectedShade === null}" role="button" v-on:click.stop>
+              include /public/images/icons/Hide.svg
+              <span>Hide</span>
+            </a>
+          </div>
+        </div>
+        <div>
+          <div class="button-group">
+            <a class="button button--disabled" role="button" v-on:click.stop>
+              include /public/images/icons/Save.svg
+              <span>Save</span>
+            </a>
+            <a class="button button--disabled" role="button" v-on:click.stop>
+              include /public/images/icons/Load.svg
+              <span>Load</span>
+            </a>
+            <a class="button button--primary" role="button" v-on:click.stop>
+              include /public/images/icons/Export.svg
+              <span>Export</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+  <script src="/public/scripts/main.js"></script>
+</body>
+</html>

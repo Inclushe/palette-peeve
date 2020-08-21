@@ -4,7 +4,7 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "watch": "parcel index.html",
+    "watch": "parcel index.pug",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -21,6 +21,7 @@
   },
   "devDependencies": {
     "@vue/component-compiler-utils": "^3.2.0",
+    "pug": "^3.0.0",
     "sass": "^1.26.10",
     "vue-template-compiler": "^2.6.11"
   }

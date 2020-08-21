@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 import Color from './../components/Color'
 const undoStates = []
 var undoIndex = -1
@@ -68,7 +68,8 @@ const store = new Vuex.Store({
       }
     },
     currentlySelectedShade: null,
-    clipboard: null
+    clipboard: null,
+    dragged: false
   },
   mutations: {
     setPalette (state, { name, shade, type, value }) {
@@ -92,8 +93,11 @@ const store = new Vuex.Store({
         state.palettes = JSON.parse(undoStates[undoIndex])
       }
     },
-    setSelectedShade (state, { name, shade }) {
-      state.currentlySelectedShade = { name, shade }
+    setSelectedShade (state, obj) {
+      state.currentlySelectedShade = obj
+    },
+    setDragged (state, bool) {
+      state.dragged = bool
     },
     copy (state) {
       if (state.currentlySelectedShade !== null) {
@@ -106,7 +110,9 @@ const store = new Vuex.Store({
       }
     },
     toggleVisibility (state, { name, shade }) {
-      state.palettes[name][shade].hidden = !state.palettes[name][shade].hidden
+      if (state.currentlySelectedShade !== null) {
+        state.palettes[state.currentlySelectedShade.name][state.currentlySelectedShade.shade].hidden = !state.palettes[state.currentlySelectedShade.name][state.currentlySelectedShade.shade].hidden
+      }
     }
   }
 })
@@ -122,11 +128,10 @@ const app = new Vue({
     shadeToHSL (shade) {
       return this.currentPalette[shade].hidden ? 'transparent' : `hsl(${this.currentPalette[shade].hue}deg, ${this.currentPalette[shade].saturation}%, ${this.currentPalette[shade].lightness}%)`
     },
-    setUndoState () {
-      this.$store.commit('setUndoState')
-    },
-    undo () {
-      this.$store.commit('undo')
+    ...mapMutations(['copy', 'paste', 'undo', 'redo', 'setUndoState', 'toggleVisibility']),
+    unsetSelectedShadeIfNotClickingShade (e) {
+      console.log(e)
+      this.$store.commit('setSelectedShade', null)
     }
   },
   computed: mapState({
@@ -143,12 +148,6 @@ const app = new Vue({
   mounted () {
     this.$store.commit('setUndoState')
     document.body.addEventListener('keydown', (e) => {
-      // console.log(e)
-      // if (e.key.toLowerCase() === 'a') {
-      //   console.log('setUndoState')
-      //   e.preventDefault()
-      //   this.$store.commit('setUndoState')
-      // }
       if (e.ctrlKey && !e.shiftKey && e.key.toLowerCase() === 'z') {
         console.log('undo')
         e.preventDefault()

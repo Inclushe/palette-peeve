@@ -1,6 +1,7 @@
 # UI Palette Picker
 
 `Note to self: Mockup incremential improvements`
+
 - `E` Essential
 - `D` Desirable
 - `O` Optional
@@ -15,18 +16,27 @@
     - [X] Hide/Show Buttons
     - [X] Contrast Checker
   - [ ] Code
-    - [ ] Palette Name/Types
-    - [ ] Input Hover/Active/Selected States
+    - [X] Palette Name/Types
+    - [X] Input Hover/Active/Selected States
       - Make 100-500 light and 600-900 dark
-    - [ ] Buttons
-    - [ ] Selecting Outline
-      - [ ] Hide when changing color
+    - [X] Adjust Palette type height
+    - [X] Buttons
+    - [X] Selecting Outline
+      - [X] Hide when changing color
+      - [X] Deselect when clicking outside of palette
+      - [X] Disable copy/paste/hide buttons when not selected
     - [ ] Contrast Warning
 - [ ] Change UI Preview to look better when "filling in the blanks" `E`
 - [ ] Add tooltips `E`
   - [ ] Mockup
   - [ ] Code
-- [ ] Add indicator ripple when keyboard shortcut is used `O`
+- [ ] Add indicator ripple `O`
+  - [ ] when keyboard shortcut is used
+  - [ ] when button is pressed
+- [ ] Fix Undo/Redo `E`
+  - [ ] Save only diffs
+  - [ ] Turn into queue
+- [ ] Delete/Reset
 - [ ] Export support `E`
   - [ ] Mockup
   - [ ] Code
@@ -41,9 +51,6 @@
 ---
 At this point, perform UX tests
 
-- [ ] Make undo/redo more efficient `E`
-  - [ ] Save only diffs
-  - [ ] Turn into queue
 - [ ] Settings `D`
   - [ ] Color Contrast
     - Black on 500
@@ -51,6 +58,7 @@ At this point, perform UX tests
     - Auto
     - Turn off contrast warnings (auto)
 - [ ] Multipallete `D`
+- [ ] Allow variable # of palettes `O`
 - [ ] Save/Load `E`
 - [ ] Allow UI preview to be swapped out `O`
 - [ ] Tutorial `D`

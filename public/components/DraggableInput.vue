@@ -1,5 +1,6 @@
 <template>
-  <input type="number" :min="min" :max="max" name="" id="" v-model.number="value" @mousedown="startDrag" @mouseup="endDrag" @touchstart="startDrag" :class="{dragged, warning: type === 'lightness' && value === 100}">
+  <input ref="input" v-if="selected" type="number" :min="min" :max="max" name="" id="" v-model.number="value" @mousedown="startDrag" @mouseup="endDrag" @touchstart="startDrag" @blur="unselect" :class="{dragged, warning: type === 'lightness' && value === 100, selected, input: true}">
+  <div v-else @mousedown="startDrag" @mouseup="endDrag" @touchstart="startDrag" :class="{dragged, warning: type === 'lightness' && value === 100, selected, input: true}">{{value}}</div>
 </template>
 
 <script>
@@ -7,11 +8,12 @@ export default {
   props: ['name', 'shade', 'type'],
   data () {
     return {
-      dragged: false,
+      dragging: false,
       temp: null,
       mouseX: null,
       min: this.type === 'hue' ? -1 : 0,
-      max: this.type === 'hue' ? 360 : 100
+      max: this.type === 'hue' ? 360 : 100,
+      selected: false
     }
   },
   methods: {
@@ -23,6 +25,7 @@ export default {
       }
     },
     startDrag (e) {
+      this.dragging = true
       this.temp = this.value
       this.mouseX = e.x
       document.body.addEventListener('mousemove', this.drag)
@@ -31,12 +34,26 @@ export default {
       console.log(e)
     },
     endDrag (e) {
-      this.dragged = false
-      document.body.removeEventListener('mousemove', this.drag)
-      document.body.removeEventListener('mouseup', this.endDrag)
-      document.body.removeEventListener('mouseleave', this.endDrag)
-      console.log(e)
-      this.$store.commit('setUndoState')
+      if (this.dragging) {
+        if (this.dragged === false) {
+          this.selected = !this.selected
+          this.$nextTick(() => {
+            if (this.selected === true) {
+              this.$refs.input.focus()
+            }
+          })
+        }
+        this.dragging = false
+        this.dragged = false
+        document.body.removeEventListener('mousemove', this.drag)
+        document.body.removeEventListener('mouseup', this.endDrag)
+        document.body.removeEventListener('mouseleave', this.endDrag)
+        console.log(e)
+        this.$store.commit('setUndoState')
+      }
+    },
+    unselect (e) {
+      this.selected = false
     }
   },
   computed: {
@@ -60,6 +77,14 @@ export default {
           type: this.type,
           value: adjustedValue
         })
+      }
+    },
+    dragged: {
+      get: function () {
+        return this.$store.state.dragged
+      },
+      set: function (newValue) {
+        this.$store.commit('setDragged', newValue)
       }
     }
   }

@@ -1,9 +1,7 @@
 <template>
-  <div :class="{'color': true, selected }" :style="{background: hidden ? 'transparent' : `hsl(${hue}deg, ${saturation}%, ${lightness}%)`}" @mousedown="setSelectedShade">
+  <div :class="{'color': true, 'color--light': Number(shade) <= 500, 'color--dark': Number(shade) > 500, selected }" :style="{background: hidden ? 'transparent' : `hsl(${hue}deg, ${saturation}%, ${lightness}%)`}" @mousedown="setSelectedShade">
     <div class="color__inner">
       <h6>{{contrastRatio}}</h6>
-      <img v-if="!hidden" src="/public/images/eye-fill.svg" @click="toggleVisibility">
-      <img v-if="hidden" src="/public/images/eye-close-fill.svg" @click="toggleVisibility">
       <DraggableInput :name="name" :shade="shade" type="hue"></DraggableInput>
       <DraggableInput :name="name" :shade="shade" type="saturation"></DraggableInput>
       <DraggableInput :name="name" :shade="shade" type="lightness"></DraggableInput>
@@ -57,19 +55,13 @@ export default {
         return state.palettes[this.name][this.shade].hidden
       },
       selected (state) {
-        return (state.currentlySelectedShade && state.currentlySelectedShade.color === this.color && state.currentlySelectedShade.shade === this.shade)
+        return (!state.dragged && state.currentlySelectedShade && state.currentlySelectedShade.color === this.color && state.currentlySelectedShade.shade === this.shade)
       }
     })
   },
   methods: {
     setSelectedShade () {
       this.$store.commit('setSelectedShade', {
-        name: this.name,
-        shade: this.shade
-      })
-    },
-    toggleVisibility () {
-      this.$store.commit('toggleVisibility', {
         name: this.name,
         shade: this.shade
       })
