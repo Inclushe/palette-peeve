@@ -36,7 +36,9 @@ export default {
     endDrag (e) {
       if (this.dragging) {
         if (this.dragged === false) {
-          this.selected = !this.selected
+          if (!this.selected) {
+            this.selected = true
+          }
           this.$nextTick(() => {
             if (this.selected === true) {
               this.$refs.input.focus()

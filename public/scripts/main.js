@@ -109,7 +109,7 @@ const store = new Vuex.Store({
         state.palettes[state.currentlySelectedShade.name][state.currentlySelectedShade.shade] = JSON.parse(state.clipboard)
       }
     },
-    toggleVisibility (state, { name, shade }) {
+    toggleVisibility (state) {
       if (state.currentlySelectedShade !== null) {
         state.palettes[state.currentlySelectedShade.name][state.currentlySelectedShade.shade].hidden = !state.palettes[state.currentlySelectedShade.name][state.currentlySelectedShade.shade].hidden
       }
@@ -167,6 +167,11 @@ const app = new Vue({
         console.log('paste')
         e.preventDefault()
         this.$store.commit('paste')
+      }
+      if (e.ctrlKey && e.key.toLowerCase() === 'd' && this.currentlySelectedShade) {
+        console.log('toggleVisibility')
+        e.preventDefault()
+        this.$store.commit('toggleVisibility')
       }
     })
   }

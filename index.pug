@@ -10,21 +10,19 @@
 <body>
   <div id="app" @click="unsetSelectedShadeIfNotClickingShade">
     <div class="stage">
-      <div class="card" :style="{background: shadeToHSL(100)}">
-      <div class="card--icon" :style="{background: shadeToHSL(200)}">
-        <svg id="book" width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M21.5 18H6.5C6.23478 18 5.98043 18.1054 5.79289 18.2929C5.60536 18.4804 5.5 18.7348 5.5 19C5.5 19.2652 5.60536 19.5196 5.79289 19.7071C5.98043 19.8946 6.23478 20 6.5 20H21.5V22H6.5C5.70435 22 4.94129 21.6839 4.37868 21.1213C3.81607 20.5587 3.5 19.7956 3.5 19V4C3.5 3.46957 3.71071 2.96086 4.08579 2.58579C4.46086 2.21071 4.96957 2 5.5 2H21.5V18ZM16.5 9V7H8.5V9H16.5Z" :style="{fill: shadeToHSL(600)}"/>
-          </svg>        
+      <div class="card" :style="{'--current-color-100': shadeToHSL(100), '--current-color-200': shadeToHSL(200), '--current-color-300': shadeToHSL(300), '--current-color-400': shadeToHSL(400), '--current-color-500': shadeToHSL(500), '--current-color-600': shadeToHSL(600), '--current-color-700': shadeToHSL(700), '--current-color-800': shadeToHSL(800), '--current-color-900': shadeToHSL(900)}">
+        <div class="card--icon">
+          <svg id="book" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M2 3.993A1 1 0 0 1 2.992 3h18.016c.548 0 .992.445.992.993v16.014a1 1 0 0 1-.992.993H2.992A.993.993 0 0 1 2 20.007V3.993zM4 5v2h2V5H4zm14 0v2h2V5h-2zM4 9v2h2V9H4zm14 0v2h2V9h-2zM4 13v2h2v-2H4zm14 0v2h2v-2h-2zM4 17v2h2v-2H4zm14 0v2h2v-2h-2z"/></svg>   
         </div>
-        <h1 :style="{color: shadeToHSL(900)}">The series of the century is going <span class="underline" :style="{background: shadeToHSL(300)}">back to basics.</span></h1>
-        <p :style="{color: shadeToHSL(800)}">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ut tincidunt nulla, eget tempor sapien. In velit ligula, dignissim sit amet lacus eu, bibendum laoreet erat. Aliquam scelerisque venenatis odio eget cursus. Aenean nec libero vestibulum, rhoncus elit nec, hendrerit libero.</p>
+        <h1>The series of the century is going <span class="underline">back to basics.</span></h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ut tincidunt nulla, eget tempor sapien. In velit ligula, dignissim sit amet lacus eu, bibendum laoreet erat. Aliquam scelerisque venenatis odio eget cursus. Aenean nec libero vestibulum, rhoncus elit nec, hendrerit libero.</p>
         <div class="mock-button-container">
-          <a href="#" class="mock-button mock-button--secondary" role="button" :style="{background: shadeToHSL(200), color: shadeToHSL(700)}">Learn More</a>
-          <a href="#" class="mock-button mock-button--primary" role="button" :style="{background: shadeToHSL(500)}">Purchase</a>
+          <a href="#" class="mock-button mock-button--secondary" role="button">Learn More</a>
+          <a href="#" class="mock-button mock-button--primary" role="button">Purchase</a>
         </div>
         <div class="mock-button-container">
-          <a href="#" class="mock-button mock-button--secondary mock-button--hover" role="button" :style="{background: shadeToHSL(200), color: shadeToHSL(600)}">Learn More</a>
-          <a href="#" class="mock-button mock-button--primary mock-button--hover" role="button" :style="{background: shadeToHSL(400)}">Purchase</a>
+          <a href="#" class="mock-button mock-button--secondary mock-button--hover" role="button">Learn More</a>
+          <a href="#" class="mock-button mock-button--primary mock-button--hover" role="button">Purchase</a>
         </div>
       </div>
       <div class="palette" v-on:click.stop>

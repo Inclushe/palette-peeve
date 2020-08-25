@@ -25,8 +25,7 @@
       - [X] Hide when changing color
       - [X] Deselect when clicking outside of palette
       - [X] Disable copy/paste/hide buttons when not selected
-    - [ ] Contrast Warning
-- [ ] Change UI Preview to look better when "filling in the blanks" `E`
+    - [X] Contrast Warning
 - [ ] Add tooltips `E`
   - [ ] Mockup
   - [ ] Code
@@ -57,6 +56,7 @@ At this point, perform UX tests
     - White on 500
     - Auto
     - Turn off contrast warnings (auto)
+    - Show indicator for AA or AAA
 - [ ] Multipallete `D`
 - [ ] Allow variable # of palettes `O`
 - [ ] Save/Load `E`
