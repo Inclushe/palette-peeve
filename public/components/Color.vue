@@ -2,11 +2,11 @@
   <div :class="{'color': true, 'color--light': Number(shade) <= 500, 'color--dark': Number(shade) > 500, selected }" :style="{background: hidden ? '#EEF0F6' : `hsl(${hue}deg, ${saturation}%, ${lightness}%)`}" @mousedown="setSelectedShade">
     <div class="color__inner">
       <div>
-        <div v-if="contrastRatio < 4.5 && contrastRatio >= 3" class="contrast-indicator contrast-indicator--warning">
+        <div v-if="contrastRatio < 4.5 && contrastRatio >= 3" class="contrast-indicator contrast-indicator--warning" @mouseover.stop="hoverStart" @mouseout.stop="hoverEnd" data-tooltip-info="Text on this color passes WCAG 2.0 level AA (≥ 3.0) but <b>fails</b> WCAG 2.0 level AAA (≥ 4.5)." data-tooltip-keys="">
           <img src="/public/images/icons/Warning.svg" alt="Warning Icon">
           <p>{{contrastRatio}}</p>
         </div>
-        <div v-if="contrastRatio < 3" class="contrast-indicator contrast-indicator--error">
+        <div v-if="contrastRatio < 3" class="contrast-indicator contrast-indicator--error" @mouseover.stop="hoverStart" @mouseout.stop="hoverEnd" data-tooltip-info="Text on this color fails WCAG 2.0 level AA (≥ 3.0)." data-tooltip-keys="">
           <img src="/public/images/icons/Error.svg" alt="Warning Icon">
           <p>{{contrastRatio}}</p>
         </div>
@@ -22,7 +22,7 @@
 
 <script>
 import DraggableInput from './DraggableInput'
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 import getContrastRatio from './../scripts/helpers/getContrastRatio'
 
 const black = {
@@ -73,7 +73,8 @@ export default {
         name: this.name,
         shade: this.shade
       })
-    }
+    },
+    ...mapMutations(['hoverStart', 'hoverEnd'])
   },
   components: {
     DraggableInput

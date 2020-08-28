@@ -26,13 +26,16 @@
       - [X] Deselect when clicking outside of palette
       - [X] Disable copy/paste/hide buttons when not selected
     - [X] Contrast Warning
-- [ ] Add tooltips `E`
+- [X] Add tooltips `E`
   - [X] Mockup
-  - [ ] Code
-- [ ] Add indicator ripple `O`
+  - [X] Code
+- [X] Add indicator ripple `O`
   - [X] Mockup
-  - [ ] when button is hovered/pressed
-  - [ ] when keyboard shortcut is used
+  - [X] when button is hovered/pressed
+  - [X] when keyboard shortcut is used
+- [ ] Move tooltips to component
+- [ ] Move ripple to component
+- [ ] Move buttons to component
 - [ ] Fix Undo/Redo `E`
   - [ ] Save all actions
   - [ ] Save only diffs

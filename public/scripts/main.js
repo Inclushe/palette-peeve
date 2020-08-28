@@ -69,7 +69,10 @@ const store = new Vuex.Store({
     },
     currentlySelectedShade: null,
     clipboard: null,
-    dragged: false
+    dragged: false,
+    hovering: false,
+    hoverElement: null,
+    hoverTimeout: null
   },
   mutations: {
     setPalette (state, { name, shade, type, value }) {
@@ -113,13 +116,43 @@ const store = new Vuex.Store({
       if (state.currentlySelectedShade !== null) {
         state.palettes[state.currentlySelectedShade.name][state.currentlySelectedShade.shade].hidden = !state.palettes[state.currentlySelectedShade.name][state.currentlySelectedShade.shade].hidden
       }
+    },
+    hoverStart (state, e) {
+      if (this.state.hovering === false) {
+        window.clearTimeout(this.state.hoverTimeout)
+        this.state.hovering = true
+        moveRippleToElement(e.target)
+        this.commit('rippleEnd', e)
+        this.state.hoverTimeout = setTimeout(() => {
+          moveTooltipAboveElement(e.target)
+        }, 1000)
+      }
+    },
+    hoverEnd (state) {
+      this.state.hovering = false
+      window.clearTimeout(this.state.hoverTimeout)
+      hideTooltip()
+      hideRipple()
+    },
+    rippleStart (state) {
+      const rippleElement = document.querySelector('#ripple')
+      if (!rippleElement.classList.contains('ripple--active')) {
+        rippleElement.classList.add('ripple--active')
+      }
+    },
+    rippleEnd (state) {
+      const rippleElement = document.querySelector('#ripple')
+      if (rippleElement.classList.contains('ripple--active')) {
+        rippleElement.classList.remove('ripple--active')
+        console.log(rippleElement)
+      }
     }
   }
 })
 
 function moveTooltipAboveElement (element) {
   const tooltipElement = document.querySelector('#tooltip')
-
+  console.log(element)
   const tooltipInfoElement = tooltipElement.querySelector('#tooltipInfo')
   tooltipInfoElement.innerHTML = element.dataset.tooltipInfo
 
@@ -142,6 +175,32 @@ function moveTooltipAboveElement (element) {
   console.log(elementRect, tooltipElement)
   tooltipElement.style.left = elementRect.left - (tooltipRect.width / 2) + (elementRect.width / 2) + 'px'
   tooltipElement.style.top = elementRect.top - tooltipRect.height + 'px'
+
+  tooltipElement.style.opacity = 1
+}
+
+function moveRippleToElement (element) {
+  const rippleElement = document.querySelector('#ripple')
+  if (!element.classList.contains('button--disabled') && element.dataset.ripple) {
+    const elementRect = element.getBoundingClientRect()
+    const rippleRect = rippleElement.getBoundingClientRect()
+    console.log('test:', elementRect)
+  
+    rippleElement.style.left = elementRect.left - (96 / 2) + (elementRect.width / 2) + 'px'
+    rippleElement.style.top = elementRect.top - (96 / 2) + (elementRect.height / 2) + 'px'
+  
+    rippleElement.style.opacity = 1
+  }
+}
+
+function hideTooltip () {
+  const tooltipElement = document.querySelector('#tooltip')
+  tooltipElement.style.opacity = 0
+}
+
+function hideRipple () {
+  const rippleElement = document.querySelector('#ripple')
+  rippleElement.style.opacity = 0
 }
 
 const app = new Vue({
@@ -149,10 +208,7 @@ const app = new Vue({
   store,
   data: {
     test: 'hello',
-    currentColor: 'green',
-    hovering: false,
-    hoverElement: null,
-    hoverTimeout: null
+    currentColor: 'green'
   },
   methods: {
     shadeToHSL (shade) {
@@ -162,22 +218,15 @@ const app = new Vue({
       console.log(e)
       this.$store.commit('setSelectedShade', null)
     },
-    hoverStart (e) {
-      console.log('a')
-      if (this.hovering === false) {
-        window.clearTimeout(this.hoverTimeout)
-        this.hovering = true
-        this.hoverTimeout = setTimeout(() => {
-          moveTooltipAboveElement(e.target)
-        }, 500)
+    ...mapMutations(['copy', 'paste', 'undo', 'redo', 'setUndoState', 'toggleVisibility', 'hoverStart', 'hoverEnd', 'rippleStart', 'rippleEnd']),
+    showRippleForAction (action) {
+      const element = document.querySelector(`a.button[data-action=${action}]`)
+      if (element) {
+        moveRippleToElement(element)
+        this.$store.commit('rippleStart')
+        setTimeout(() => { this.$store.commit('rippleEnd'); this.$store.commit('hoverEnd') }, 150)
       }
-    },
-    hoverEnd (e) {
-      console.log('b')
-      this.hovering = false
-      window.clearTimeout(this.hoverTimeout)
-    },
-    ...mapMutations(['copy', 'paste', 'undo', 'redo', 'setUndoState', 'toggleVisibility']),
+    }
   },
   computed: mapState({
     currentPalette (state) {
@@ -196,26 +245,31 @@ const app = new Vue({
       if (e.ctrlKey && !e.shiftKey && e.key.toLowerCase() === 'z') {
         console.log('undo')
         e.preventDefault()
+        this.showRippleForAction('undo')
         this.$store.commit('undo')
       }
       if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'z') {
         console.log('redo')
         e.preventDefault()
+        this.showRippleForAction('redo')
         this.$store.commit('redo')
       }
       if (e.ctrlKey && e.key.toLowerCase() === 'c' && this.currentlySelectedShade) {
         console.log('copy')
         e.preventDefault()
+        this.showRippleForAction('copy')
         this.$store.commit('copy')
       }
       if (e.ctrlKey && e.key.toLowerCase() === 'v' && this.currentlySelectedShade) {
         console.log('paste')
         e.preventDefault()
+        this.showRippleForAction('paste')
         this.$store.commit('paste')
       }
       if (e.ctrlKey && e.key.toLowerCase() === 'd' && this.currentlySelectedShade) {
         console.log('toggleVisibility')
         e.preventDefault()
+        this.showRippleForAction('toggleVisibility')
         this.$store.commit('toggleVisibility')
       }
     })

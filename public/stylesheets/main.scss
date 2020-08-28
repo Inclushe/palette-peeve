@@ -255,6 +255,9 @@ a.mock-button {
   border: 2px solid $gray900;
   border-radius: 1rem;
   font: $shadeFont;
+  & > * {
+    pointer-events: none;
+  }
   img {
     margin: 0.5rem;
     height: 1.5rem;
@@ -342,6 +345,9 @@ a.button {
   font-weight: 500;
   text-align: center;
   gap: 0.5rem;
+  opacity: 0;
+  transition: opacity ease-in-out 50ms;
+  z-index: 1;
   &:after {
     content: '';
     position: absolute;
@@ -361,6 +367,24 @@ a.button {
       background: $gray700;
       border-radius: 0.25rem;
     }
+  }
+}
+
+
+.ripple {
+  position: absolute;
+  height: 6rem;
+  width: 6rem;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 99rem;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 1;
+  transition: opacity ease-in-out 100ms, transform ease-out 50ms, background ease-out 50ms;
+  transform: scale(1);
+  &--active {
+    transform: scale(0.83);
+    background: rgba(0, 0, 0, 0.2);
   }
 }
 
