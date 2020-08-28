@@ -117,22 +117,67 @@ const store = new Vuex.Store({
   }
 })
 
+function moveTooltipAboveElement (element) {
+  const tooltipElement = document.querySelector('#tooltip')
+
+  const tooltipInfoElement = tooltipElement.querySelector('#tooltipInfo')
+  tooltipInfoElement.innerHTML = element.dataset.tooltipInfo
+
+  const tooltipKeysElement = tooltipElement.querySelector('#tooltipKeys')
+  let keys = element.dataset.tooltipKeys.split(',')
+  let keysHTML = ''
+  console.log(keys)
+  if (element.dataset.tooltipKeys !== '') {
+    keys.forEach((value, index) => {
+      keysHTML += `<div class="tooltip--key">${value}</div>`
+      if (index < keys.length - 1) {
+        keysHTML += '<div>+</div>'
+      }
+    })
+  }
+  tooltipKeysElement.innerHTML = keysHTML
+
+  const elementRect = element.getBoundingClientRect()
+  const tooltipRect = tooltipElement.getBoundingClientRect()
+  console.log(elementRect, tooltipElement)
+  tooltipElement.style.left = elementRect.left - (tooltipRect.width / 2) + (elementRect.width / 2) + 'px'
+  tooltipElement.style.top = elementRect.top - tooltipRect.height + 'px'
+}
+
 const app = new Vue({
   el: '#app',
   store,
   data: {
     test: 'hello',
-    currentColor: 'green'
+    currentColor: 'green',
+    hovering: false,
+    hoverElement: null,
+    hoverTimeout: null
   },
   methods: {
     shadeToHSL (shade) {
       return this.currentPalette[shade].hidden ? 'transparent' : `hsl(${this.currentPalette[shade].hue}deg, ${this.currentPalette[shade].saturation}%, ${this.currentPalette[shade].lightness}%)`
     },
-    ...mapMutations(['copy', 'paste', 'undo', 'redo', 'setUndoState', 'toggleVisibility']),
     unsetSelectedShadeIfNotClickingShade (e) {
       console.log(e)
       this.$store.commit('setSelectedShade', null)
-    }
+    },
+    hoverStart (e) {
+      console.log('a')
+      if (this.hovering === false) {
+        window.clearTimeout(this.hoverTimeout)
+        this.hovering = true
+        this.hoverTimeout = setTimeout(() => {
+          moveTooltipAboveElement(e.target)
+        }, 500)
+      }
+    },
+    hoverEnd (e) {
+      console.log('b')
+      this.hovering = false
+      window.clearTimeout(this.hoverTimeout)
+    },
+    ...mapMutations(['copy', 'paste', 'undo', 'redo', 'setUndoState', 'toggleVisibility']),
   },
   computed: mapState({
     currentPalette (state) {

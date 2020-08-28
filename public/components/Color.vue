@@ -1,5 +1,5 @@
 <template>
-  <div :class="{'color': true, 'color--light': Number(shade) <= 500, 'color--dark': Number(shade) > 500, selected }" :style="{background: hidden ? 'transparent' : `hsl(${hue}deg, ${saturation}%, ${lightness}%)`}" @mousedown="setSelectedShade">
+  <div :class="{'color': true, 'color--light': Number(shade) <= 500, 'color--dark': Number(shade) > 500, selected }" :style="{background: hidden ? '#EEF0F6' : `hsl(${hue}deg, ${saturation}%, ${lightness}%)`}" @mousedown="setSelectedShade">
     <div class="color__inner">
       <div>
         <div v-if="contrastRatio < 4.5 && contrastRatio >= 3" class="contrast-indicator contrast-indicator--warning">

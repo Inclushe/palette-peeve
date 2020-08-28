@@ -27,15 +27,17 @@
       - [X] Disable copy/paste/hide buttons when not selected
     - [X] Contrast Warning
 - [ ] Add tooltips `E`
-  - [ ] Mockup
+  - [X] Mockup
   - [ ] Code
 - [ ] Add indicator ripple `O`
+  - [X] Mockup
+  - [ ] when button is hovered/pressed
   - [ ] when keyboard shortcut is used
-  - [ ] when button is pressed
 - [ ] Fix Undo/Redo `E`
+  - [ ] Save all actions
   - [ ] Save only diffs
   - [ ] Turn into queue
-- [ ] Delete/Reset
+- [ ] Fix Drag
 - [ ] Export support `E`
   - [ ] Mockup
   - [ ] Code
@@ -46,6 +48,7 @@
       - [ ] SASS `O`
       - [ ] Tailwind `O`
     - [ ] Illustrator `O`
+- [ ] Delete/Reset
 
 ---
 At this point, perform UX tests

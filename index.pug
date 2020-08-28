@@ -9,6 +9,14 @@
 </head>
 <body>
   <div id="app" @click="unsetSelectedShadeIfNotClickingShade">
+    <div class="tooltip" id="tooltip">
+      <div class="tooltip--text" id="tooltipInfo">Copy</div>
+      <div class="tooltip--keyboard" id="tooltipKeys">
+        <div class="tooltip--key">Ctrl</div>
+        <div>+</div>
+        <div class="tooltip--key">C</div>
+      </div>
+    </div>
     <div class="stage">
       <div class="card" :style="{'--current-color-100': shadeToHSL(100), '--current-color-200': shadeToHSL(200), '--current-color-300': shadeToHSL(300), '--current-color-400': shadeToHSL(400), '--current-color-500': shadeToHSL(500), '--current-color-600': shadeToHSL(600), '--current-color-700': shadeToHSL(700), '--current-color-800': shadeToHSL(800), '--current-color-900': shadeToHSL(900)}">
         <div class="card--icon">
@@ -50,25 +58,25 @@
         <div>
           <img src="/public/images/icons/logo--tentative.svg" alt="" class="logo">
           <div class="button-group">
-            <a @click="undo" class="button" role="button" v-on:click.stop>
+            <a @click="undo" class="button" role="button" v-on:click.stop @mouseover.stop="hoverStart" @mouseout.stop="hoverEnd" data-tooltip-info="Undo" data-tooltip-keys="Ctrl,Z">
               include /public/images/icons/Undo.svg
               <span>Undo</span>
             </a>
-            <a @click="redo" class="button" role="button" v-on:click.stop>
+            <a @click="redo" class="button" role="button" v-on:click.stop @mouseover.stop="hoverStart" @mouseout.stop="hoverEnd" data-tooltip-info="Redo" data-tooltip-keys="Ctrl,Shift,Z">
               include /public/images/icons/Redo.svg
               <span>Redo</span>
             </a>
           </div>
           <div class="button-group">
-            <a @click="copy" :class="{button: true, 'button--disabled': currentlySelectedShade === null}" role="button" v-on:click.stop>
+            <a @click="copy" :class="{button: true, 'button--disabled': currentlySelectedShade === null}" role="button" v-on:click.stop @mouseover.stop="hoverStart" @mouseout.stop="hoverEnd" data-tooltip-info="Copy" data-tooltip-keys="Ctrl,C">
               include /public/images/icons/Copy.svg
               <span>Copy</span>
             </a>
-            <a @click="paste" :class="{button: true, 'button--disabled': currentlySelectedShade === null}" role="button" v-on:click.stop>
+            <a @click="paste" :class="{button: true, 'button--disabled': currentlySelectedShade === null}" role="button" v-on:click.stop @mouseover.stop="hoverStart" @mouseout.stop="hoverEnd" data-tooltip-info="Paste" data-tooltip-keys="Ctrl,V">
               include /public/images/icons/Paste.svg
               <span>Paste</span>
             </a>
-            <a @click="toggleVisibility" :class="{button: true, 'button--disabled': currentlySelectedShade === null}" role="button" v-on:click.stop>
+            <a @click="toggleVisibility" :class="{button: true, 'button--disabled': currentlySelectedShade === null}" role="button" v-on:click.stop @mouseover.stop="hoverStart" @mouseout.stop="hoverEnd" data-tooltip-info="Hide" data-tooltip-keys="Ctrl,D">
               include /public/images/icons/Hide.svg
               <span>Hide</span>
             </a>
@@ -76,15 +84,15 @@
         </div>
         <div>
           <div class="button-group">
-            <a class="button button--disabled" role="button" v-on:click.stop>
+            <a class="button button--disabled" role="button" v-on:click.stop @mouseover.stop="hoverStart" @mouseout.stop="hoverEnd" data-tooltip-info="Save" data-tooltip-keys="Ctrl,S">
               include /public/images/icons/Save.svg
               <span>Save</span>
             </a>
-            <a class="button button--disabled" role="button" v-on:click.stop>
+            <a class="button button--disabled" role="button" v-on:click.stop @mouseover.stop="hoverStart" @mouseout.stop="hoverEnd" data-tooltip-info="Load" data-tooltip-keys="Ctrl,L">
               include /public/images/icons/Load.svg
               <span>Load</span>
             </a>
-            <a class="button button--primary" role="button" v-on:click.stop>
+            <a class="button button--primary" role="button" v-on:click.stop @mouseover.stop="hoverStart" @mouseout.stop="hoverEnd" data-tooltip-info="Export" data-tooltip-keys="">
               include /public/images/icons/Export.svg
               <span>Export</span>
             </a>
