@@ -33,9 +33,9 @@
   - [X] Mockup
   - [X] when button is hovered/pressed
   - [X] when keyboard shortcut is used
-- [ ] Move tooltips to component
-- [ ] Move ripple to component
-- [ ] Move buttons to component
+- [X] Move tooltips to component
+- [X] Move ripple to component
+- [X] Move buttons to component
 - [ ] Fix Undo/Redo `E`
   - [ ] Save all actions
   - [ ] Save only diffs

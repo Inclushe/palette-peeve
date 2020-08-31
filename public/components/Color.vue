@@ -3,11 +3,11 @@
     <div class="color__inner">
       <div>
         <div v-if="contrastRatio < 4.5 && contrastRatio >= 3" class="contrast-indicator contrast-indicator--warning" @mouseover.stop="hoverStart" @mouseout.stop="hoverEnd" data-tooltip-info="Text on this color passes WCAG 2.0 level AA (≥ 3.0) but <b>fails</b> WCAG 2.0 level AAA (≥ 4.5)." data-tooltip-keys="">
-          <img src="/public/images/icons/Warning.svg" alt="Warning Icon">
+          <img src="/public/images/icons/warning.svg" alt="Warning Icon">
           <p>{{contrastRatio}}</p>
         </div>
         <div v-if="contrastRatio < 3" class="contrast-indicator contrast-indicator--error" @mouseover.stop="hoverStart" @mouseout.stop="hoverEnd" data-tooltip-info="Text on this color fails WCAG 2.0 level AA (≥ 3.0)." data-tooltip-keys="">
-          <img src="/public/images/icons/Error.svg" alt="Warning Icon">
+          <img src="/public/images/icons/error.svg" alt="Warning Icon">
           <p>{{contrastRatio}}</p>
         </div>
       </div>

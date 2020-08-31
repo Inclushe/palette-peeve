@@ -252,9 +252,10 @@ a.mock-button {
   width: 6rem;
   margin-left: 0.5rem;
   box-sizing: border-box;
-  border: 2px solid $gray900;
+  // border: 2px solid $gray900;
   border-radius: 1rem;
   font: $shadeFont;
+  color: black;
   & > * {
     pointer-events: none;
   }
@@ -268,12 +269,12 @@ a.mock-button {
     text-align: center;
     margin-right: 1rem;
   }
-  &--warning {
-    background: #f8f2af;
-  }
-  &--error {
-    background: #fcd0cf;
-  }
+  // &--warning {
+  //   background: #f8f2af;
+  // }
+  // &--error {
+  //   background: #fcd0cf;
+  // }
 }
 
 footer.nav-footer {
@@ -313,11 +314,8 @@ a.button {
   > * {
     pointer-events: none;
   }
-  svg {
+  img {
     margin-bottom: 0.5rem;
-    path {
-      fill: $gray900;
-    }
   }
   span {
     font-weight: 500;
@@ -325,8 +323,8 @@ a.button {
   }
   &--disabled {
     cursor: not-allowed;
-    svg path {
-      fill: $gray500;
+    img {
+      opacity: 0.5;
     }
     span {
       color: $gray500;
@@ -363,7 +361,7 @@ a.button {
     align-items: center;
     gap: 0.5rem;
     & > div.tooltip--key {
-      padding: 0.25rem 0.5rem;
+      padding: 0.5rem 0.5rem 0.25rem;
       background: $gray700;
       border-radius: 0.25rem;
     }
