@@ -8,7 +8,7 @@
   <title>Document</title>
 </head>
 <body>
-  <div id="app" @click="unsetSelectedShadeIfNotClickingShade">
+  <div id="app" @click="unsetSelectedShadeIfNotClickingShade" :class="{ 'app': true, 'app--dragging': dragged }">
     <Tooltip></Tooltip>
     <Ripple></Ripple>
     <div class="stage">
@@ -52,14 +52,8 @@
         <div>
           <img src="/public/images/icons/logo--tentative.svg" alt="" class="logo">
           <div class="button-group">
-            <a @click="undo($event); hoverEnd(hoverEnd); hoverStart($event);" class="button" role="button" @mousedown="rippleStart" @mouseup="rippleEnd" v-on:click.stop @mouseover.stop="hoverStart" @mouseout.stop="hoverEnd" data-ripple="true" data-action="undo" data-tooltip-info="Undo" data-tooltip-keys="Ctrl,Z">
-              <img src="/public/images/icons/undo.svg" alt="">
-              <span>Undo</span>
-            </a>
-            <a @click="redo($event); hoverEnd(hoverEnd); hoverStart($event);" class="button" role="button" @mousedown="rippleStart" @mouseup="rippleEnd" v-on:click.stop @mouseover.stop="hoverStart" @mouseout.stop="hoverEnd" data-ripple="true" data-action="redo" data-tooltip-info="Redo" data-tooltip-keys="Ctrl,Shift,Z">
-              <img src="/public/images/icons/redo.svg">
-              <span>Redo</span>
-            </a>
+            <ui-button name="Undo" action="undo" :imageurl="icons['undo']" keyboardshortcut="Ctrl,Z"></ui-button>
+            <ui-button name="Redo" action="redo" :imageurl="icons['redo']" keyboardshortcut="Ctrl,Shift,Z"></ui-button>
           </div>
           <div class="button-group">
             <ui-button name="Copy" action="copy" :imageurl="icons['copy']" keyboardshortcut="Ctrl,C" activewhenselecting="true"></ui-button>

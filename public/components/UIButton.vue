@@ -18,12 +18,12 @@ export default {
   },
   methods: {
     runAction (e) {
-      if (this.action === 'paste' || this.action === 'toggleVisibility') {
-        this.setUndoState()
-      }
       this.$store.commit(this.action)
+      if (this.action === 'paste' || this.action === 'toggleVisibility') {
+        this.saveUndoState()
+      }
     },
-    ...mapMutations(['setUndoState', 'hoverStart', 'hoverEnd', 'rippleStart', 'rippleEnd'])
+    ...mapMutations(['saveUndoState', 'hoverStart', 'hoverEnd', 'rippleStart', 'rippleEnd'])
   },
 }
 </script>

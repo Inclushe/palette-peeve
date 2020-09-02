@@ -36,11 +36,9 @@
 - [X] Move tooltips to component
 - [X] Move ripple to component
 - [X] Move buttons to component
-- [ ] Fix Undo/Redo `E`
-  - [ ] Save all actions
-  - [ ] Save only diffs
-  - [ ] Turn into queue
-- [ ] Fix Drag
+- [X] Fix Undo/Redo `E`
+  - [X] Save all actions
+- [X] Fix Drag
 - [ ] Export support `E`
   - [ ] Mockup
   - [ ] Code
@@ -66,6 +64,7 @@ At this point, perform UX tests
 - [ ] Multipallete `D`
 - [ ] Allow variable # of palettes `O`
 - [ ] Save/Load `E`
+- [ ] Get it working on phones `O`
 - [ ] Allow UI preview to be swapped out `O`
 - [ ] Tutorial `D`
   - [Ask users to read this or use own text](https://refactoringui.com/previews/building-your-color-palette/)

@@ -92,7 +92,7 @@ h1, h2, h3, h4, h5, h6, a, p {
 
 a.mock-button {
   display: block;
-  padding: 0.75rem 1.5rem;
+  padding: 0.75rem 1.5rem 0.625em;
   border-radius: 0.25rem;
   background: var(--current-color-200);
   color: var(--current-color-700);
@@ -346,6 +346,7 @@ a.button {
   opacity: 0;
   transition: opacity ease-in-out 50ms;
   z-index: 1;
+  pointer-events: none;
   &:after {
     content: '';
     position: absolute;
@@ -386,7 +387,7 @@ a.button {
   }
 }
 
-#app {
+.app {
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -399,5 +400,11 @@ a.button {
     justify-content: center;
     align-items: center;
     gap: 2rem;
+  }
+  &--dragging {
+    cursor: e-resize !important;
+    & * {
+      cursor: e-resize !important;
+    }
   }
 }

@@ -51,7 +51,7 @@ export default {
         document.body.removeEventListener('mouseup', this.endDrag)
         document.body.removeEventListener('mouseleave', this.endDrag)
         console.log(e)
-        this.$store.commit('setUndoState')
+        this.$store.commit('saveUndoState')
       }
     },
     unselect (e) {

@@ -1,7 +1,7 @@
 <template>
   <div class="tooltip" id="tooltip" :style="style">
-    <div class="tooltip--text" id="tooltipInfo">{{ text }}</div>
-    <div class="tooltip--keyboard" id="tooltipKeys" v-html="keyboard"></div>
+    <div class="tooltip--text" v-html="text"></div>
+    <div class="tooltip--keyboard" v-html="keyboard"></div>
   </div>
 </template>
 

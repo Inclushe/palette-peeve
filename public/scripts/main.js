@@ -30,7 +30,7 @@ const app = new Vue({
         setTimeout(() => { this.$store.commit('rippleEnd'); this.$store.commit('hoverEnd') }, 150)
       }
     },
-    ...mapMutations(['copy', 'paste', 'undo', 'redo', 'setUndoState', 'toggleVisibility', 'hoverStart', 'hoverEnd', 'rippleStart', 'rippleEnd'])
+    ...mapMutations(['copy', 'paste', 'undo', 'redo', 'saveUndoState', 'toggleVisibility', 'hoverStart', 'hoverEnd', 'rippleStart', 'rippleEnd'])
   },
   computed: mapState({
     currentPalette (state) {
@@ -38,7 +38,8 @@ const app = new Vue({
     },
     currentlySelectedShade (state) {
       return state.currentlySelectedShade
-    }
+    },
+    dragged: (state) => state.dragged
   }),
   components: {
     Color,
@@ -47,7 +48,7 @@ const app = new Vue({
     Ripple
   },
   mounted () {
-    this.$store.commit('setUndoState')
+    this.$store.commit('saveUndoState')
     document.body.addEventListener('keydown', (e) => {
       if (e.ctrlKey && !e.shiftKey && e.key.toLowerCase() === 'z') {
         console.log('undo')
@@ -68,18 +69,18 @@ const app = new Vue({
         this.$store.commit('copy')
       }
       if (e.ctrlKey && e.key.toLowerCase() === 'v' && this.currentlySelectedShade) {
-        this.$store.commit('setUndoState')
         console.log('paste')
         e.preventDefault()
         this.showRippleForAction('paste')
         this.$store.commit('paste')
+        this.$store.commit('saveUndoState')
       }
       if (e.ctrlKey && e.key.toLowerCase() === 'd' && this.currentlySelectedShade) {
-        this.$store.commit('setUndoState')
         console.log('toggleVisibility')
         e.preventDefault()
         this.showRippleForAction('toggleVisibility')
         this.$store.commit('toggleVisibility')
+        this.$store.commit('saveUndoState')
       }
     })
   }

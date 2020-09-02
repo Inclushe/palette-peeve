@@ -75,17 +75,22 @@ export default new Vuex.Store({
     hovering: false,
     hoverTimeout: null,
     undoStates: [],
-    undoIndex: -1
+    undoIndex: -1,
+    undoLimit: 200
   },
   mutations: {
     setPalette (state, { name, shade, type, value }) {
       this.state.palettes[name][shade][type] = value
     },
-    setUndoState (state) {
+    saveUndoState (state) {
+      // Commit this *after* changing state.
       this.state.undoIndex++
       this.state.undoStates[this.state.undoIndex] = (JSON.stringify(state.palettes))
       this.state.undoStates.splice(this.state.undoIndex + 1)
-      // TODO: This might get too big, convert to queue
+      if (this.state.undoStates.length > this.state.undoLimit) {
+        this.state.undoStates.splice(0, this.state.undoStates.length - this.state.undoLimit)
+        this.state.undoIndex = this.state.undoStates.length - 1
+      }
     },
     undo (state) {
       if (this.state.undoIndex - 1 >= 0) {
