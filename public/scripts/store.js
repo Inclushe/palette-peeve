@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import tooltip from './modules/tooltip'
 import ripple from './modules/ripple'
+import HSLToRGB from './helpers/HSLToRGB'
 
 Vue.use(Vuex)
 
@@ -141,6 +142,23 @@ export default new Vuex.Store({
       window.clearTimeout(this.state.hoverTimeout)
       this.commit('hideTooltip')
       this.commit('hideRipple')
+    },
+    exportToFile (state, type) {
+      switch (type) {
+        case "figma":
+          var svgFile = '<svg width="1920" height="1080" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg">'
+          Object.keys(this.state.palettes.green).forEach((key, index) => {
+            const object = this.state.palettes.green[key]
+            const RGB = HSLToRGB(object)
+            svgFile += `<rect id="Green/${key}" x="${100*index}" y="0" width="100" height="100" fill="rgb(${RGB.red}, ${RGB.green}, ${RGB.blue})"/>`
+          })
+          svgFile += '</svg>'
+          this.href = 'data:image/svg+xml;base64,' + btoa(svgFile)
+          console.log('data:image/svg+xml;base64,' + btoa(svgFile))
+          break
+        default:
+          console.log('TEST')
+      }
     }
   }
 })

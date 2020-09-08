@@ -30,7 +30,7 @@ const app = new Vue({
         setTimeout(() => { this.$store.commit('rippleEnd'); this.$store.commit('hoverEnd') }, 150)
       }
     },
-    ...mapMutations(['copy', 'paste', 'undo', 'redo', 'saveUndoState', 'toggleVisibility', 'hoverStart', 'hoverEnd', 'rippleStart', 'rippleEnd'])
+    ...mapMutations(['copy', 'paste', 'undo', 'redo', 'saveUndoState', 'toggleVisibility', 'hoverStart', 'hoverEnd', 'rippleStart', 'rippleEnd', 'exportToFile'])
   },
   computed: mapState({
     currentPalette (state) {

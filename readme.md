@@ -40,7 +40,7 @@
   - [X] Save all actions
 - [X] Fix Drag
 - [ ] Export support `E`
-  - [ ] Mockup
+  - [X] Mockup
   - [ ] Code
     - [ ] Figma `E`
     - [ ] CSS `D`

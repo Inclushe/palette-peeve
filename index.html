@@ -12,39 +12,117 @@
     <Tooltip></Tooltip>
     <Ripple></Ripple>
     <div class="stage">
-      <div class="card" :style="{'--current-color-100': shadeToHSL(100), '--current-color-200': shadeToHSL(200), '--current-color-300': shadeToHSL(300), '--current-color-400': shadeToHSL(400), '--current-color-500': shadeToHSL(500), '--current-color-600': shadeToHSL(600), '--current-color-700': shadeToHSL(700), '--current-color-800': shadeToHSL(800), '--current-color-900': shadeToHSL(900)}">
-        <div class="card--icon">
-          <svg id="book" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M2 3.993A1 1 0 0 1 2.992 3h18.016c.548 0 .992.445.992.993v16.014a1 1 0 0 1-.992.993H2.992A.993.993 0 0 1 2 20.007V3.993zM4 5v2h2V5H4zm14 0v2h2V5h-2zM4 9v2h2V9H4zm14 0v2h2V9h-2zM4 13v2h2v-2H4zm14 0v2h2v-2h-2zM4 17v2h2v-2H4zm14 0v2h2v-2h-2z"/></svg>   
-        </div>
-        <h1>The series of the century is going <span class="underline">back to basics.</span></h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ut tincidunt nulla, eget tempor sapien. In velit ligula, dignissim sit amet lacus eu, bibendum laoreet erat. Aliquam scelerisque venenatis odio eget cursus. Aenean nec libero vestibulum, rhoncus elit nec, hendrerit libero.</p>
-        <div class="mock-button-container">
-          <a href="#" class="mock-button mock-button--secondary" role="button">Learn More</a>
-          <a href="#" class="mock-button mock-button--primary" role="button">Purchase</a>
-        </div>
-        <div class="mock-button-container">
-          <a href="#" class="mock-button mock-button--secondary mock-button--hover" role="button">Learn More</a>
-          <a href="#" class="mock-button mock-button--primary mock-button--hover" role="button">Purchase</a>
-        </div>
-      </div>
-      <div class="palette" v-on:click.stop>
-        <div class="palette-info">
-          <h1 class="palette__name">Green</h1>
-          <div class="palette__attributes">
-            <h2 class="palette__attribute">Hue</h2>
-            <h2 class="palette__attribute">Saturation</h2>
-            <h2 class="palette__attribute">Brightness</h2>
+      <div class="sidebar">
+        <header>
+          <h1>Export</h1>
+          <img src="/public/images/icons/close.svg" alt="Close Icon">
+        </header>
+        <div class="sidebar--contents">
+          <div class="option">
+            <header class="option__header">
+              <div class="option__name">
+                <h2>bb</h2>
+              </div>
+              <div class="option__actions">
+                <img src="/public/images/icons/download.svg" alt="Download Icon">
+                <img src="/public/images/icons/info.svg" alt="Info Icon">
+              </div>
+            </header>
+            <div class="option__info">
+              <p>Download the file.</p>
+              <p>Install the extension Chroma Colors from the Figma extension library.</p>
+              <p>Place the downloaded file into your current directory.</p>
+              <p>Select the color palletes, right-click, and click on Plugins > Chroma Colors.</p>
+            </div>
+          </div>
+          <div class="option">
+            <header class="option__header">
+              <div class="option__name">
+                <h2>ff</h2>
+              </div>
+              <div class="option__actions">
+                <img src="/public/images/icons/download.svg" alt="Download Icon">
+                <img src="/public/images/icons/info.svg" alt="Info Icon">
+              </div>
+            </header>
+            <div class="option__info">
+              <p>Download the file.</p>
+              <p>Install the extension Chroma Colors from the Figma extension library.</p>
+              <p>Place the downloaded file into your current directory.</p>
+              <p>Select the color palletes, right-click, and click on Plugins > Chroma Colors.</p>
+            </div>
+          </div>
+          <div class="option">
+            <header class="option__header">
+              <div class="option__name">
+                <h2>a</h2>
+              </div>
+              <div class="option__actions">
+                <img src="/public/images/icons/download.svg" alt="Download Icon">
+                <img src="/public/images/icons/info.svg" alt="Info Icon">
+              </div>
+            </header>
+            <div class="option__info">
+              <p>Download the file.</p>
+              <p>Install the extension Chroma Colors from the Figma extension library.</p>
+              <p>Place the downloaded file into your current directory.</p>
+              <p>Select the color palletes, right-click, and click on Plugins > Chroma Colors.</p>
+            </div>
+          </div>
+          <div class="option option--expanded">
+            <header class="option__header">
+              <div class="option__name">
+                <h2>Figma</h2>
+              </div>
+              <div class="option__actions">
+                <img src="/public/images/icons/warning.svg" alt="Download Icon" @click="exportToFile('figma')">
+                <img src="/public/images/icons/info.svg" alt="Info Icon">
+              </div>
+            </header>
+            <div class="option__info">
+              <p>1. Download the file.</p>
+              <p>2. Install the extension Chroma Colors from the Figma extension library.</p>
+              <p>3. Place the downloaded file into your current directory.</p>
+              <p>4. Select the color palletes, right-click, and click on Plugins > Chroma Colors.</p>
+            </div>
           </div>
         </div>
-        <Color name="green" shade="100"></Color>
-        <Color name="green" shade="200"></Color>
-        <Color name="green" shade="300"></Color>
-        <Color name="green" shade="400"></Color>
-        <Color name="green" shade="500"></Color>
-        <Color name="green" shade="600"></Color>
-        <Color name="green" shade="700"></Color>
-        <Color name="green" shade="800"></Color>
-        <Color name="green" shade="900"></Color>
+      </div>
+      <div class="main">
+        <div class="card" :style="{'--current-color-100': shadeToHSL(100), '--current-color-200': shadeToHSL(200), '--current-color-300': shadeToHSL(300), '--current-color-400': shadeToHSL(400), '--current-color-500': shadeToHSL(500), '--current-color-600': shadeToHSL(600), '--current-color-700': shadeToHSL(700), '--current-color-800': shadeToHSL(800), '--current-color-900': shadeToHSL(900)}">
+          <div class="card--icon">
+            <svg id="book" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M2 3.993A1 1 0 0 1 2.992 3h18.016c.548 0 .992.445.992.993v16.014a1 1 0 0 1-.992.993H2.992A.993.993 0 0 1 2 20.007V3.993zM4 5v2h2V5H4zm14 0v2h2V5h-2zM4 9v2h2V9H4zm14 0v2h2V9h-2zM4 13v2h2v-2H4zm14 0v2h2v-2h-2zM4 17v2h2v-2H4zm14 0v2h2v-2h-2z"/></svg>   
+          </div>
+          <h1>The series of the century is going <span class="underline">back to basics.</span></h1>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ut tincidunt nulla, eget tempor sapien. In velit ligula, dignissim sit amet lacus eu, bibendum laoreet erat. Aliquam scelerisque venenatis odio eget cursus. Aenean nec libero vestibulum, rhoncus elit nec, hendrerit libero.</p>
+          <div class="mock-button-container">
+            <a href="#" class="mock-button mock-button--secondary" role="button">Learn More</a>
+            <a href="#" class="mock-button mock-button--primary" role="button">Purchase</a>
+          </div>
+          <div class="mock-button-container">
+            <a href="#" class="mock-button mock-button--secondary mock-button--hover" role="button">Learn More</a>
+            <a href="#" class="mock-button mock-button--primary mock-button--hover" role="button">Purchase</a>
+          </div>
+        </div>
+        <div class="palette" v-on:click.stop>
+          <div class="palette-info">
+            <h1 class="palette__name">Green</h1>
+            <div class="palette__attributes">
+              <h2 class="palette__attribute">Hue</h2>
+              <h2 class="palette__attribute">Saturation</h2>
+              <h2 class="palette__attribute">Brightness</h2>
+            </div>
+          </div>
+          <Color name="green" shade="100"></Color>
+          <Color name="green" shade="200"></Color>
+          <Color name="green" shade="300"></Color>
+          <Color name="green" shade="400"></Color>
+          <Color name="green" shade="500"></Color>
+          <Color name="green" shade="600"></Color>
+          <Color name="green" shade="700"></Color>
+          <Color name="green" shade="800"></Color>
+          <Color name="green" shade="900"></Color>
+        </div>
       </div>
     </div>
     <footer class="nav-footer">

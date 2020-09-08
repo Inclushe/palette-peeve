@@ -30,7 +30,7 @@ body {
   font-family: "Space Grotesk", sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6, a, p {
+h1, h2, h3, h4, h5, h6, a, p, ol {
   margin: 0;
   padding: 0;
   font-weight: 400;
@@ -124,7 +124,7 @@ a.mock-button {
     text-align: right;
     h1 {
       font-weight: 500;
-      font-size: 2rem;
+      font-size: 1.5rem;
       color: $gray900;
     }
     .palette__attributes {
@@ -394,17 +394,85 @@ a.button {
   justify-content: space-between;
   align-items: center;
   .stage {
-    flex-grow: 1;
+    width: 100%;
     display: flex;
-    flex-direction: column;
+    flex-grow: 1;
     justify-content: center;
     align-items: center;
-    gap: 2rem;
+    .main {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+    }
   }
   &--dragging {
     cursor: e-resize !important;
     & * {
       cursor: e-resize !important;
+    }
+  }
+}
+
+.sidebar {
+  height: 100%;
+  width: 24rem;
+  padding: 2rem;
+  box-sizing: border-box;
+  background: white;
+  color: $gray900;
+  border-right: .25rem solid $gray100;
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    h1 {
+      font-size: 2rem;
+      font-weight: 500;
+    }
+    img {
+      margin: -0.25rem;
+      height: 2rem;
+      width: 2rem;
+    }
+  }
+  &--contents {
+    margin-top: 1.5rem;
+    .option {
+      header {
+        display: flex;
+        justify-content: space-between;
+        height: 1.5rem;
+        padding: 1rem 0;
+      }
+      border-bottom: 0.125rem solid $gray200;
+      &:last-child {
+        border-bottom: none;
+      }
+      &__name h2 {
+        font-size: 1.5rem;
+      }
+      &__actions {
+        img {
+          margin-left: 1rem;
+          height: 24px;
+          width: 24px;
+        }
+      }
+      &__info {
+        display: none;
+        p {
+          margin: 1rem 0;
+          line-height: 150%;
+        }
+      }
+      &--expanded {
+        .option__info {
+          display: block;
+        }
+      }
     }
   }
 }
