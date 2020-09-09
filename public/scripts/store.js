@@ -12,8 +12,9 @@ export default new Vuex.Store({
     ripple
   },
   state: {
-    palettes: {
-      green: {
+    palettes: [
+      {
+        name: 'Green',
         100: {
           hue: 141,
           saturation: 100,
@@ -69,7 +70,7 @@ export default new Vuex.Store({
           hidden: false
         }
       }
-    },
+    ],
     currentlySelectedShade: null,
     clipboard: null,
     dragged: false,
@@ -80,8 +81,11 @@ export default new Vuex.Store({
     undoLimit: 200
   },
   mutations: {
-    setPalette (state, { name, shade, type, value }) {
-      this.state.palettes[name][shade][type] = value
+    setPalette (state, { index, shade, type, value }) {
+      this.state.palettes[index][shade][type] = value
+    },
+    setPaletteName (state, { index, newName}) {
+      this.state.palettes[index].name = newName
     },
     saveUndoState (state) {
       // Commit this *after* changing state.
@@ -113,17 +117,17 @@ export default new Vuex.Store({
     },
     copy (state) {
       if (state.currentlySelectedShade !== null) {
-        state.clipboard = JSON.stringify(state.palettes[state.currentlySelectedShade.name][state.currentlySelectedShade.shade])
+        state.clipboard = JSON.stringify(state.palettes[state.currentlySelectedShade.index][state.currentlySelectedShade.shade])
       }
     },
     paste (state) {
       if (state.clipboard !== null) {
-        state.palettes[state.currentlySelectedShade.name][state.currentlySelectedShade.shade] = JSON.parse(state.clipboard)
+        state.palettes[state.currentlySelectedShade.index][state.currentlySelectedShade.shade] = JSON.parse(state.clipboard)
       }
     },
     toggleVisibility (state) {
       if (state.currentlySelectedShade !== null) {
-        state.palettes[state.currentlySelectedShade.name][state.currentlySelectedShade.shade].hidden = !state.palettes[state.currentlySelectedShade.name][state.currentlySelectedShade.shade].hidden
+        state.palettes[state.currentlySelectedShade.index][state.currentlySelectedShade.shade].hidden = !state.palettes[state.currentlySelectedShade.index][state.currentlySelectedShade.shade].hidden
       }
     },
     hoverStart (state, e) {
@@ -143,18 +147,21 @@ export default new Vuex.Store({
       this.commit('hideTooltip')
       this.commit('hideRipple')
     },
-    exportToFile (state, type) {
+    exportToFile (state, { event, type }) {
+      console.log(type)
       switch (type) {
-        case "figma":
+        case 'figma':
           var svgFile = '<svg width="1920" height="1080" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg">'
-          Object.keys(this.state.palettes.green).forEach((key, index) => {
-            const object = this.state.palettes.green[key]
+          var name = this.state.palettes[0].name
+          Object.keys(this.state.palettes[0]).forEach((key, index) => {
+            if (key === 'name') return
+            const object = this.state.palettes[0][key]
             const RGB = HSLToRGB(object)
-            svgFile += `<rect id="Green/${key}" x="${100*index}" y="0" width="100" height="100" fill="rgb(${RGB.red}, ${RGB.green}, ${RGB.blue})"/>`
+            svgFile += `<rect id="${name}/${key}" x="${100 * index}" y="0" width="100" height="100" fill="rgb(${RGB.red}, ${RGB.green}, ${RGB.blue})"/>`
           })
           svgFile += '</svg>'
-          this.href = 'data:image/svg+xml;base64,' + btoa(svgFile)
-          console.log('data:image/svg+xml;base64,' + btoa(svgFile))
+          event.target.href = 'data:image/svg+xml;base64,' + btoa(svgFile)
+          event.target.download = `${name}FigmaColorPalette.svg`
           break
         default:
           console.log('TEST')

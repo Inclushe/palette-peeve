@@ -24,8 +24,12 @@
                 <h2>bb</h2>
               </div>
               <div class="option__actions">
-                <img src="/public/images/icons/download.svg" alt="Download Icon">
-                <img src="/public/images/icons/info.svg" alt="Info Icon">
+                <a href="#" class="button button--mini" download="file.svg">
+                  <img src="/public/images/icons/download.svg" alt="Download Icon">
+                </a>
+                <a href="#" class="button button--mini">
+                  <img src="/public/images/icons/info.svg" alt="Info Icon">
+                </a>
               </div>
             </header>
             <div class="option__info">
@@ -41,8 +45,12 @@
                 <h2>ff</h2>
               </div>
               <div class="option__actions">
-                <img src="/public/images/icons/download.svg" alt="Download Icon">
-                <img src="/public/images/icons/info.svg" alt="Info Icon">
+                <a href="#" class="button button--mini" download="file.svg">
+                  <img src="/public/images/icons/download.svg" alt="Download Icon">
+                </a>
+                <a href="#" class="button button--mini">
+                  <img src="/public/images/icons/info.svg" alt="Info Icon">
+                </a>
               </div>
             </header>
             <div class="option__info">
@@ -58,8 +66,12 @@
                 <h2>a</h2>
               </div>
               <div class="option__actions">
-                <img src="/public/images/icons/download.svg" alt="Download Icon">
-                <img src="/public/images/icons/info.svg" alt="Info Icon">
+                <a href="#" class="button button--mini" download="file.svg">
+                  <img src="/public/images/icons/download.svg" alt="Download Icon">
+                </a>
+                <a href="#" class="button button--mini">
+                  <img src="/public/images/icons/info.svg" alt="Info Icon">
+                </a>
               </div>
             </header>
             <div class="option__info">
@@ -75,8 +87,12 @@
                 <h2>Figma</h2>
               </div>
               <div class="option__actions">
-                <img src="/public/images/icons/warning.svg" alt="Download Icon" @click="exportToFile('figma')">
-                <img src="/public/images/icons/info.svg" alt="Info Icon">
+                <a href="#" class="button button--mini" download="file.svg" @click="exportToFile({event: $event, type: 'figma'})">
+                  <img src="/public/images/icons/download.svg" alt="Download Icon">
+                </a>
+                <a href="#" class="button button--mini">
+                  <img src="/public/images/icons/info.svg" alt="Info Icon">
+                </a>
               </div>
             </header>
             <div class="option__info">
@@ -105,23 +121,23 @@
           </div>
         </div>
         <div class="palette" v-on:click.stop>
-          <div class="palette-info">
-            <h1 class="palette__name">Green</h1>
+          <div class="palette__info">
+            <textarea class="palette__name" type="text" v-model="currentPaletteName"></textarea>
             <div class="palette__attributes">
               <h2 class="palette__attribute">Hue</h2>
               <h2 class="palette__attribute">Saturation</h2>
               <h2 class="palette__attribute">Brightness</h2>
             </div>
           </div>
-          <Color name="green" shade="100"></Color>
-          <Color name="green" shade="200"></Color>
-          <Color name="green" shade="300"></Color>
-          <Color name="green" shade="400"></Color>
-          <Color name="green" shade="500"></Color>
-          <Color name="green" shade="600"></Color>
-          <Color name="green" shade="700"></Color>
-          <Color name="green" shade="800"></Color>
-          <Color name="green" shade="900"></Color>
+          <Color index="0" shade="100"></Color>
+          <Color index="0" shade="200"></Color>
+          <Color index="0" shade="300"></Color>
+          <Color index="0" shade="400"></Color>
+          <Color index="0" shade="500"></Color>
+          <Color index="0" shade="600"></Color>
+          <Color index="0" shade="700"></Color>
+          <Color index="0" shade="800"></Color>
+          <Color index="0" shade="900"></Color>
         </div>
       </div>
     </div>

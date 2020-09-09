@@ -12,7 +12,7 @@ const app = new Vue({
   store,
   data: {
     icons,
-    currentColor: 'green'
+    currentColor: 0
   },
   methods: {
     shadeToHSL (shade) {
@@ -32,15 +32,28 @@ const app = new Vue({
     },
     ...mapMutations(['copy', 'paste', 'undo', 'redo', 'saveUndoState', 'toggleVisibility', 'hoverStart', 'hoverEnd', 'rippleStart', 'rippleEnd', 'exportToFile'])
   },
-  computed: mapState({
-    currentPalette (state) {
-      return state.palettes[this.currentColor]
+  computed: {
+    currentPaletteName: {
+      get: function () {
+        return this.currentPalette.name
+      },
+      set: function (newValue) {
+        this.$store.commit('setPaletteName', {
+          index: 0,
+          newName: newValue
+        })
+      }
     },
-    currentlySelectedShade (state) {
-      return state.currentlySelectedShade
-    },
-    dragged: (state) => state.dragged
-  }),
+    ...mapState({
+      currentPalette (state) {
+        return state.palettes[this.currentColor]
+      },
+      currentlySelectedShade (state) {
+        return state.currentlySelectedShade
+      },
+      dragged: (state) => state.dragged
+    })
+  },
   components: {
     Color,
     'ui-button': UIButton,

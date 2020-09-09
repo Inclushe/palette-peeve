@@ -12,9 +12,9 @@
         </div>
       </div>
       <div>
-      <DraggableInput :name="name" :shade="shade" type="hue"></DraggableInput>
-      <DraggableInput :name="name" :shade="shade" type="saturation"></DraggableInput>
-      <DraggableInput :name="name" :shade="shade" type="lightness"></DraggableInput>
+      <DraggableInput :index="index" :shade="shade" type="hue"></DraggableInput>
+      <DraggableInput :index="index" :shade="shade" type="saturation"></DraggableInput>
+      <DraggableInput :index="index" :shade="shade" type="lightness"></DraggableInput>
       </div>
     </div>
   </div>
@@ -38,7 +38,7 @@ const white = {
 }
 
 export default {
-  props: ['name', 'shade'],
+  props: ['index', 'shade'],
   computed: {
     contrastRatio () {
       // @TODO: Might be too demanding
@@ -51,16 +51,16 @@ export default {
     },
     ...mapState({
       hue (state) {
-        return state.palettes[this.name][this.shade].hue
+        return state.palettes[this.index][this.shade].hue
       },
       saturation (state) {
-        return state.palettes[this.name][this.shade].saturation
+        return state.palettes[this.index][this.shade].saturation
       },
       lightness (state) {
-        return state.palettes[this.name][this.shade].lightness
+        return state.palettes[this.index][this.shade].lightness
       },
       hidden (state) {
-        return state.palettes[this.name][this.shade].hidden
+        return state.palettes[this.index][this.shade].hidden
       },
       selected (state) {
         return (!state.dragged && state.currentlySelectedShade && state.currentlySelectedShade.color === this.color && state.currentlySelectedShade.shade === this.shade)
@@ -70,7 +70,7 @@ export default {
   methods: {
     setSelectedShade () {
       this.$store.commit('setSelectedShade', {
-        name: this.name,
+        index: this.index,
         shade: this.shade
       })
     },

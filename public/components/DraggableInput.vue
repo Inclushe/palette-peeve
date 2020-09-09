@@ -1,11 +1,11 @@
 <template>
-  <input ref="input" v-if="selected" type="number" :min="min" :max="max" name="" id="" v-model.number="value" @mousedown="startDrag" @mouseup="endDrag" @touchstart="startDrag" @blur="unselect" :class="{dragged, warning: type === 'lightness' && value === 100, selected, input: true}">
+  <input ref="input" v-if="selected" type="number" :min="min" :max="max" index="" id="" v-model.number="value" @mousedown="startDrag" @mouseup="endDrag" @touchstart="startDrag" @blur="unselect" :class="{dragged, warning: type === 'lightness' && value === 100, selected, input: true}">
   <div v-else @mousedown="startDrag" @mouseup="endDrag" @touchstart="startDrag" :class="{dragged, warning: type === 'lightness' && value === 100, selected, input: true}">{{value}}</div>
 </template>
 
 <script>
 export default {
-  props: ['name', 'shade', 'type'],
+  props: ['index', 'shade', 'type'],
   data () {
     return {
       dragging: false,
@@ -61,7 +61,7 @@ export default {
   computed: {
     value: {
       get: function () {
-        return this.$store.state.palettes[this.name][this.shade][this.type]
+        return this.$store.state.palettes[this.index][this.shade][this.type]
       },
       set: function (newValue) {
         let adjustedValue
@@ -74,7 +74,7 @@ export default {
           adjustedValue = Math.max(0, Math.min(newValue, 100))
         }
         this.$store.commit('setPalette', {
-          name: this.name,
+          index: this.index,
           shade: this.shade,
           type: this.type,
           value: adjustedValue
