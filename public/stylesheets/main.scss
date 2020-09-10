@@ -123,13 +123,19 @@ a.mock-button {
     padding: 1rem 0;
     text-align: right;
     textarea.palette__name {
+      margin: -1rem;
+      padding: 1rem;
       width: 8ch;
       font-family: inherit;
       font-weight: 500;
       font-size: 1.5rem;
       text-align: right;
+      border: none;
       color: $gray900;
       resize: none;
+      &:hover {
+        background: $gray100;
+      }
     }
     .palette__attributes {
       margin-bottom: -2px;
@@ -327,9 +333,12 @@ a.button {
   }
   &--mini {
     display: block;
-    margin: initial;
-    padding: initial;
+    margin: -1rem;
+    padding: 1rem;
     width: initial;
+    span {
+      display: none;
+    }
   }
   &--disabled {
     cursor: not-allowed;
@@ -398,7 +407,7 @@ a.button {
 }
 
 .app {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -408,7 +417,7 @@ a.button {
     display: flex;
     flex-grow: 1;
     justify-content: center;
-    align-items: center;
+    align-items: stretch;
     .main {
       flex-grow: 1;
       display: flex;
@@ -427,7 +436,6 @@ a.button {
 }
 
 .sidebar {
-  height: 100%;
   width: 24rem;
   padding: 2rem;
   box-sizing: border-box;

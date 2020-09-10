@@ -5,6 +5,7 @@ import Color from './../components/Color'
 import UIButton from './../components/UIButton'
 import Tooltip from './../components/Tooltip'
 import Ripple from './../components/Ripple'
+import Sidebar from './../components/Sidebar'
 import icons from './../images/icons/*.svg'
 
 const app = new Vue({
@@ -51,14 +52,16 @@ const app = new Vue({
       currentlySelectedShade (state) {
         return state.currentlySelectedShade
       },
-      dragged: (state) => state.dragged
+      dragged: (state) => state.dragged,
+      showingSidebar: (state) => state.showingSidebar
     })
   },
   components: {
     Color,
     'ui-button': UIButton,
     Tooltip,
-    Ripple
+    Ripple,
+    Sidebar
   },
   mounted () {
     this.$store.commit('saveUndoState')
@@ -94,6 +97,12 @@ const app = new Vue({
         this.showRippleForAction('toggleVisibility')
         this.$store.commit('toggleVisibility')
         this.$store.commit('saveUndoState')
+      }
+      if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'e') {
+        console.log('showSidebar')
+        e.preventDefault()
+        this.showRippleForAction('showSidebar')
+        this.$store.commit('showSidebar')
       }
     })
   }

@@ -75,6 +75,7 @@ export default new Vuex.Store({
     clipboard: null,
     dragged: false,
     hovering: false,
+    showingSidebar: false,
     hoverTimeout: null,
     undoStates: [],
     undoIndex: -1,
@@ -130,8 +131,15 @@ export default new Vuex.Store({
         state.palettes[state.currentlySelectedShade.index][state.currentlySelectedShade.shade].hidden = !state.palettes[state.currentlySelectedShade.index][state.currentlySelectedShade.shade].hidden
       }
     },
+    showSidebar (state) {
+      state.showingSidebar = true
+    },
+    hideSidebar (state) {
+      state.showingSidebar = false
+    },
     hoverStart (state, e) {
       if (this.state.hovering === false) {
+        console.log('hoverStart')
         window.clearTimeout(this.state.hoverTimeout)
         this.state.hovering = true
         this.commit('moveRippleToElement', e.target)
@@ -142,6 +150,7 @@ export default new Vuex.Store({
       }
     },
     hoverEnd (state) {
+      console.log('hoverEnd')
       this.state.hovering = false
       window.clearTimeout(this.state.hoverTimeout)
       this.commit('hideTooltip')

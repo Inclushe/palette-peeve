@@ -12,98 +12,7 @@
     <Tooltip></Tooltip>
     <Ripple></Ripple>
     <div class="stage">
-      <div class="sidebar">
-        <header>
-          <h1>Export</h1>
-          <img src="/public/images/icons/close.svg" alt="Close Icon">
-        </header>
-        <div class="sidebar--contents">
-          <div class="option">
-            <header class="option__header">
-              <div class="option__name">
-                <h2>bb</h2>
-              </div>
-              <div class="option__actions">
-                <a href="#" class="button button--mini" download="file.svg">
-                  <img src="/public/images/icons/download.svg" alt="Download Icon">
-                </a>
-                <a href="#" class="button button--mini">
-                  <img src="/public/images/icons/info.svg" alt="Info Icon">
-                </a>
-              </div>
-            </header>
-            <div class="option__info">
-              <p>Download the file.</p>
-              <p>Install the extension Chroma Colors from the Figma extension library.</p>
-              <p>Place the downloaded file into your current directory.</p>
-              <p>Select the color palletes, right-click, and click on Plugins > Chroma Colors.</p>
-            </div>
-          </div>
-          <div class="option">
-            <header class="option__header">
-              <div class="option__name">
-                <h2>ff</h2>
-              </div>
-              <div class="option__actions">
-                <a href="#" class="button button--mini" download="file.svg">
-                  <img src="/public/images/icons/download.svg" alt="Download Icon">
-                </a>
-                <a href="#" class="button button--mini">
-                  <img src="/public/images/icons/info.svg" alt="Info Icon">
-                </a>
-              </div>
-            </header>
-            <div class="option__info">
-              <p>Download the file.</p>
-              <p>Install the extension Chroma Colors from the Figma extension library.</p>
-              <p>Place the downloaded file into your current directory.</p>
-              <p>Select the color palletes, right-click, and click on Plugins > Chroma Colors.</p>
-            </div>
-          </div>
-          <div class="option">
-            <header class="option__header">
-              <div class="option__name">
-                <h2>a</h2>
-              </div>
-              <div class="option__actions">
-                <a href="#" class="button button--mini" download="file.svg">
-                  <img src="/public/images/icons/download.svg" alt="Download Icon">
-                </a>
-                <a href="#" class="button button--mini">
-                  <img src="/public/images/icons/info.svg" alt="Info Icon">
-                </a>
-              </div>
-            </header>
-            <div class="option__info">
-              <p>Download the file.</p>
-              <p>Install the extension Chroma Colors from the Figma extension library.</p>
-              <p>Place the downloaded file into your current directory.</p>
-              <p>Select the color palletes, right-click, and click on Plugins > Chroma Colors.</p>
-            </div>
-          </div>
-          <div class="option option--expanded">
-            <header class="option__header">
-              <div class="option__name">
-                <h2>Figma</h2>
-              </div>
-              <div class="option__actions">
-                <a href="#" class="button button--mini" download="file.svg" @click="exportToFile({event: $event, type: 'figma'})">
-                  <img src="/public/images/icons/download.svg" alt="Download Icon">
-                </a>
-                <a href="#" class="button button--mini">
-                  <img src="/public/images/icons/info.svg" alt="Info Icon">
-                </a>
-              </div>
-            </header>
-            <div class="option__info">
-              <p>1. Download the file.</p>
-              <p>2. Install the extension Chroma Colors from the Figma extension library.</p>
-              <p>3. Place the downloaded file into your current directory.</p>
-              <p>4. Select the color palletes, right-click, and click on Plugins > Chroma Colors.</p>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Sidebar v-if="showingSidebar"></Sidebar>
       <div class="main">
         <div class="card" :style="{'--current-color-100': shadeToHSL(100), '--current-color-200': shadeToHSL(200), '--current-color-300': shadeToHSL(300), '--current-color-400': shadeToHSL(400), '--current-color-500': shadeToHSL(500), '--current-color-600': shadeToHSL(600), '--current-color-700': shadeToHSL(700), '--current-color-800': shadeToHSL(800), '--current-color-900': shadeToHSL(900)}">
           <div class="card--icon">
@@ -126,7 +35,7 @@
             <div class="palette__attributes">
               <h2 class="palette__attribute">Hue</h2>
               <h2 class="palette__attribute">Saturation</h2>
-              <h2 class="palette__attribute">Brightness</h2>
+              <h2 class="palette__attribute">Lightness</h2>
             </div>
           </div>
           <Color index="0" shade="100"></Color>
@@ -159,7 +68,7 @@
           <div class="button-group">
             <ui-button name="Save" action="save" :imageurl="icons['save']" keyboardshortcut="Ctrl,S" disabled="true"></ui-button>
             <ui-button name="Load" action="load" :imageurl="icons['load']" keyboardshortcut="Ctrl,L" disabled="true"></ui-button>
-            <ui-button name="Export" action="export" :imageurl="icons['export']" keyboardshortcut="Ctrl,E" disabled="true"></ui-button>
+            <ui-button name="Export" action="showSidebar" :imageurl="icons['export']" keyboardshortcut="Ctrl,Shift,E"></ui-button>
           </div>
         </div>
       </div>
