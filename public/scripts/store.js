@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+const colorNamer = require('color-namer')
 import tooltip from './modules/tooltip'
 import ripple from './modules/ripple'
 import HSLToRGB from './helpers/HSLToRGB'
@@ -15,6 +16,7 @@ export default new Vuex.Store({
     palettes: [
       {
         name: 'Green',
+        customName: false,
         100: {
           hue: 141,
           saturation: 100,
@@ -79,35 +81,36 @@ export default new Vuex.Store({
     hoverTimeout: null,
     undoStates: [],
     undoIndex: -1,
-    undoLimit: 200
+    undoLimit: 200,
+    middlePalleteTimeout: null
   },
   mutations: {
     setPalette (state, { index, shade, type, value }) {
-      this.state.palettes[index][shade][type] = value
+      state.palettes[index][shade][type] = value
     },
     setPaletteName (state, { index, newName}) {
-      this.state.palettes[index].name = newName
+      state.palettes[index].name = newName
     },
     saveUndoState (state) {
       // Commit this *after* changing state.
-      this.state.undoIndex++
-      this.state.undoStates[this.state.undoIndex] = (JSON.stringify(state.palettes))
-      this.state.undoStates.splice(this.state.undoIndex + 1)
-      if (this.state.undoStates.length > this.state.undoLimit) {
-        this.state.undoStates.splice(0, this.state.undoStates.length - this.state.undoLimit)
-        this.state.undoIndex = this.state.undoStates.length - 1
+      state.undoIndex++
+      state.undoStates[state.undoIndex] = (JSON.stringify(state.palettes))
+      state.undoStates.splice(state.undoIndex + 1)
+      if (state.undoStates.length > state.undoLimit) {
+        state.undoStates.splice(0, state.undoStates.length - state.undoLimit)
+        state.undoIndex = state.undoStates.length - 1
       }
     },
     undo (state) {
-      if (this.state.undoIndex - 1 >= 0) {
-        this.state.undoIndex--
-        state.palettes = JSON.parse(this.state.undoStates[this.state.undoIndex])
+      if (state.undoIndex - 1 >= 0) {
+        state.undoIndex--
+        state.palettes = JSON.parse(state.undoStates[state.undoIndex])
       }
     },
     redo (state) {
-      if (this.state.undoIndex + 1 < this.state.undoStates.length) {
-        this.state.undoIndex++
-        state.palettes = JSON.parse(this.state.undoStates[this.state.undoIndex])
+      if (state.undoIndex + 1 < state.undoStates.length) {
+        state.undoIndex++
+        state.palettes = JSON.parse(state.undoStates[state.undoIndex])
       }
     },
     setSelectedShade (state, obj) {
@@ -138,33 +141,46 @@ export default new Vuex.Store({
       state.showingSidebar = false
     },
     hoverStart (state, e) {
-      if (this.state.hovering === false) {
+      if (state.hovering === false) {
         console.log('hoverStart')
-        window.clearTimeout(this.state.hoverTimeout)
-        this.state.hovering = true
+        window.clearTimeout(state.hoverTimeout)
+        state.hovering = true
         this.commit('moveRippleToElement', e.target)
         this.commit('rippleEnd', e)
-        this.state.hoverTimeout = setTimeout(() => {
+        state.hoverTimeout = setTimeout(() => {
           this.commit('moveTooltipAboveElement', e.target)
         }, 1000)
       }
     },
     hoverEnd (state) {
       console.log('hoverEnd')
-      this.state.hovering = false
-      window.clearTimeout(this.state.hoverTimeout)
+      state.hovering = false
+      window.clearTimeout(state.hoverTimeout)
       this.commit('hideTooltip')
       this.commit('hideRipple')
+    },
+    middlePalleteChanged (state) {
+      window.clearTimeout(state.middlePalleteTimeout)
+      state.middlePalleteTimeout = setTimeout(() => {
+        this.commit('autogenerateName')
+      }, 300)
+    },
+    autogenerateName (state) {
+      if (!state.palettes[0].customName) {
+        const middleShade = state.palettes[0][500]
+        let generatedName = colorNamer(`hsl(${middleShade.hue}, ${middleShade.saturation}%, ${middleShade.lightness}%)`, { pick: ['basic'] }).basic[0].name
+        state.palettes[0].name = generatedName[0].toUpperCase() + generatedName.slice(1)
+      }
     },
     exportToFile (state, { event, type }) {
       console.log(type)
       switch (type) {
         case 'figma':
           var svgFile = '<svg width="1920" height="1080" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg">'
-          var name = this.state.palettes[0].name
-          Object.keys(this.state.palettes[0]).forEach((key, index) => {
+          var name = state.palettes[0].name
+          Object.keys(state.palettes[0]).forEach((key, index) => {
             if (key === 'name') return
-            const object = this.state.palettes[0][key]
+            const object = state.palettes[0][key]
             const RGB = HSLToRGB(object)
             svgFile += `<rect id="${name}/${key}" x="${100 * index}" y="0" width="100" height="100" fill="rgb(${RGB.red}, ${RGB.green}, ${RGB.blue})"/>`
           })

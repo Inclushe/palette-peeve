@@ -79,6 +79,9 @@ export default {
           type: this.type,
           value: adjustedValue
         })
+        if (this.shade == 500) {
+          this.$store.commit('middlePalleteChanged')
+        }
       }
     },
     dragged: {

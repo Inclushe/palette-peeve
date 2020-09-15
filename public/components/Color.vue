@@ -1,12 +1,21 @@
 <template>
-  <div :class="{'color': true, 'color--light': Number(shade) <= 500, 'color--dark': Number(shade) > 500, selected }" :style="{background: hidden ? '#EEF0F6' : `hsl(${hue}deg, ${saturation}%, ${lightness}%)`}" @mousedown="setSelectedShade">
+  <div :class="{'color': true, 'color--light': type === 'light', 'color--dark': type === 'dark', selected }" :style="{background: hidden ? '#EEF0F6' : `hsl(${hue}deg, ${saturation}%, ${lightness}%)`}" @mousedown="setSelectedShade">
     <div class="color__inner">
       <div>
-        <div v-if="contrastRatio < 4.5 && contrastRatio >= 3" class="contrast-indicator contrast-indicator--warning" @mouseover.stop="hoverStart" @mouseout.stop="hoverEnd" data-tooltip-info="Text on this color passes WCAG 2.0 level AA (≥ 3.0) but <b>fails</b> WCAG 2.0 level AAA (≥ 4.5)." data-tooltip-keys="">
+        <div v-if="hidden" class="indicator indicator--mini indicator--hidden" @mouseover.stop="hoverStart" @mouseout.stop="hoverEnd">
+          <img src="/public/images/icons/hide.svg" alt="Hide Icon">
+        </div>
+        <div v-else-if="contrastRatio >= 7" class="indicator indicator--mini" @mouseover.stop="hoverStart" @mouseout.stop="hoverEnd" data-tooltip-info="Text on this color passes WCAG 2.0 level AAA for small text (≥ 7)." data-tooltip-keys="">
+          <img :src="type === 'light' ? icons['doubleBlack'] : icons['doubleWhite']" alt="Double Check Icon">
+        </div>
+        <div v-else-if="contrastRatio < 7 && contrastRatio >= 4.5" class="indicator indicator--mini" @mouseover.stop="hoverStart" @mouseout.stop="hoverEnd" data-tooltip-info="Text on this color passes WCAG 2.0 level AAA for large text (≥ 4.5)." data-tooltip-keys="">
+          <img :src="type === 'light' ? icons['checkBlack'] : icons['checkWhite']" alt="Check Icon">
+        </div>
+        <div v-else-if="contrastRatio < 4.5 && contrastRatio >= 3" class="indicator indicator--warning" @mouseover.stop="hoverStart" @mouseout.stop="hoverEnd" data-tooltip-info="Text on this color passes WCAG 2.0 level AA (≥ 3.0) but <b>fails</b> WCAG 2.0 level AAA (≥ 4.5)." data-tooltip-keys="">
           <img src="/public/images/icons/warning.svg" alt="Warning Icon">
           <p>{{contrastRatio}}</p>
         </div>
-        <div v-if="contrastRatio < 3" class="contrast-indicator contrast-indicator--error" @mouseover.stop="hoverStart" @mouseout.stop="hoverEnd" data-tooltip-info="Text on this color fails WCAG 2.0 level AA (≥ 3.0)." data-tooltip-keys="">
+        <div v-else-if="contrastRatio < 3" class="indicator indicator--error" @mouseover.stop="hoverStart" @mouseout.stop="hoverEnd" data-tooltip-info="Text on this color fails WCAG 2.0 level AA (≥ 3.0)." data-tooltip-keys="">
           <img src="/public/images/icons/error.svg" alt="Warning Icon">
           <p>{{contrastRatio}}</p>
         </div>
@@ -24,6 +33,7 @@
 import DraggableInput from './DraggableInput'
 import { mapState, mapMutations } from 'vuex'
 import getContrastRatio from './../scripts/helpers/getContrastRatio'
+import icons from './../images/icons/*.svg'
 
 const black = {
   hue: 0,
@@ -39,6 +49,12 @@ const white = {
 
 export default {
   props: ['index', 'shade'],
+  data () {
+    return {
+      icons,
+      type: null
+    }
+  },
   computed: {
     contrastRatio () {
       // @TODO: Might be too demanding
@@ -78,6 +94,9 @@ export default {
   },
   components: {
     DraggableInput
+  },
+  mounted () {
+    this.type = Number(this.shade) <= 500 || this.hidden ? 'light' : 'dark'
   }
 }
 </script>

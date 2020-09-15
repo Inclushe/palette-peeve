@@ -253,15 +253,15 @@ a.mock-button {
   }
 }
 
-.contrast-indicator {
+.indicator {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: white;
   height: 2rem;
   width: 6rem;
   margin-left: 0.5rem;
   box-sizing: border-box;
+  background: white;
   // border: 2px solid $gray900;
   border-radius: 1rem;
   font: $shadeFont;
@@ -273,6 +273,13 @@ a.mock-button {
     margin: 0.5rem;
     height: 1.5rem;
     width: 1.5rem;
+  }
+  &--mini {
+    background: transparent;
+    width: 2rem;
+    img {
+      margin: 0.25rem;
+    }
   }
   p {
     flex-grow: 1;
