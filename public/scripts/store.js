@@ -15,60 +15,60 @@ export default new Vuex.Store({
   state: {
     palettes: [
       {
-        name: 'Green',
+        name: 'Gray',
         customName: false,
         100: {
-          hue: 141,
-          saturation: 100,
+          hue: 225,
+          saturation: 30,
           lightness: 95,
           hidden: false
         },
         200: {
-          hue: 141,
-          saturation: 77,
-          lightness: 88,
+          hue: 225,
+          saturation: 25,
+          lightness: 89,
           hidden: false
         },
         300: {
-          hue: 141,
-          saturation: 80,
-          lightness: 71,
+          hue: 225,
+          saturation: 20,
+          lightness: 82,
           hidden: false
         },
         400: {
-          hue: 141,
-          saturation: 75,
-          lightness: 65,
+          hue: 225,
+          saturation: 17,
+          lightness: 76,
           hidden: false
         },
         500: {
-          hue: 141,
-          saturation: 75,
-          lightness: 48,
+          hue: 230,
+          saturation: 15,
+          lightness: 70,
           hidden: false
         },
         600: {
-          hue: 141,
-          saturation: 77,
-          lightness: 38,
+          hue: 228,
+          saturation: 15,
+          lightness: 60,
           hidden: false
         },
         700: {
-          hue: 130,
-          saturation: 44,
-          lightness: 32,
+          hue: 228,
+          saturation: 12,
+          lightness: 46,
           hidden: false
         },
         800: {
-          hue: 104,
-          saturation: 70,
-          lightness: 19,
+          hue: 228,
+          saturation: 13,
+          lightness: 37,
           hidden: false
         },
         900: {
-          hue: 108,
-          saturation: 92,
-          lightness: 12,
+          hue: 229,
+          saturation: 10,
+          lightness: 30,
           hidden: false
         }
       }
@@ -176,11 +176,11 @@ export default new Vuex.Store({
       console.log(type)
       switch (type) {
         case 'figma':
-          var svgFile = '<svg width="1920" height="1080" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg">'
+          var svgFile = '<svg width="900" height="100" viewBox="0 0 900 100" fill="none" xmlns="http://www.w3.org/2000/svg">'
           var name = state.palettes[0].name
           Object.keys(state.palettes[0]).forEach((key, index) => {
-            if (key === 'name') return
             const object = state.palettes[0][key]
+            if (typeof object !== 'object') return
             const RGB = HSLToRGB(object)
             svgFile += `<rect id="${name}/${key}" x="${100 * index}" y="0" width="100" height="100" fill="rgb(${RGB.red}, ${RGB.green}, ${RGB.blue})"/>`
           })

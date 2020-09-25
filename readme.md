@@ -42,7 +42,7 @@
 - [ ] Export support `E`
   - [X] Mockup
   - [ ] Code
-    - [ ] Figma `E`
+    - [X] Figma `E`
     - [ ] CSS `D`
       - [ ] Varibles `D`
       - [ ] SCSS `O`
