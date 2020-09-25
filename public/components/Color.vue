@@ -1,5 +1,5 @@
 <template>
-  <div :class="{'color': true, 'color--light': type === 'light', 'color--dark': type === 'dark', selected }" :style="{background: hidden ? '#EEF0F6' : `hsl(${hue}deg, ${saturation}%, ${lightness}%)`}" @mousedown="setSelectedShade">
+  <div :class="{'color': true, 'color--light': type === 'light' || hidden, 'color--dark': type === 'dark' && !hidden, selected }" :style="{background: hidden ? '#EEF0F6' : `hsl(${hue}deg, ${saturation}%, ${lightness}%)`}" @mousedown="setSelectedShade">
     <div class="color__inner">
       <div>
         <div v-if="hidden" class="indicator indicator--mini indicator--hidden" @mouseover.stop="hoverStart" @mouseout.stop="hoverEnd">
