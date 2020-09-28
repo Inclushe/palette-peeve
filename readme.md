@@ -54,6 +54,19 @@
 ---
 At this point, perform UX tests
 
+- [ ] Add different input types
+- [ ] Issues
+  - [ ] Hidden has tooltip
+  - [ ] Make hidden icon more apparent
+  - [ ] Not apparent you can copy and paste
+  - [ ] Weird NaN issue?
+  - [ ] Add warnings when editing input on
+    - [ ] hidden shade
+    - [ ] close to black/white shade
+    - [ ] low saturation
+  - [ ] Suggest choosing inbetween values
+  - [ ] Onboarding
+- [ ] Logo Design `E`
 - [ ] Settings `D`
   - [ ] Color Contrast
     - Black on 500
@@ -61,18 +74,21 @@ At this point, perform UX tests
     - Auto
     - Turn off contrast warnings (auto)
     - Show indicator for AA or AAA
+- [ ] Multiselect `O`
 - [ ] Multipallete `D`
 - [ ] Allow variable # of palettes `O`
 - [ ] Save/Load `E`
-- [ ] Get it working on phones `O`
+- [ ] Make responsive
+  - [ ] Get it working on phones `O`
 - [ ] Allow UI preview to be swapped out `O`
 - [ ] Tutorial `D`
   - [Ask users to read this or use own text](https://refactoringui.com/previews/building-your-color-palette/)
   - Base color
     - Text Color Black/White/Ignore Contrast
   - 100/900
-  - 300/700 (I don't know how to fix the UI to appropriately adjust this)
+  - 300/700
   - 200/400
   - 600/800
+- [ ] Select different UI types `O`
 - [ ] Welcome page `E` or Welcome screen `O`
 - [ ] Credits `E`

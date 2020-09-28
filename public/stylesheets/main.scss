@@ -232,6 +232,7 @@ a.mock-button {
     -webkit-appearance: textfield;
     border: none;
     background: transparent;
+    cursor: e-resize;
     font: $shadeFont;
     transition: background ease-in-out 50ms;
     &.warning {
@@ -249,6 +250,7 @@ a.mock-button {
       padding: 3px 7px;
       border: 1px solid black;
       color: black;
+      cursor: initial;
     }
   }
 }

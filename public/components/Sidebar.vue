@@ -17,7 +17,7 @@
         </header>
         <div class="option__info">
           <p>1. Download the file.</p>
-          <p>2. Install the extension <a href="https://www.figma.com/community/plugin/739237058450529919/Chroma-Colors">Chroma Colors</a> from the Figma extension library.</p>
+          <p>2. Install the extension <a href="https://www.figma.com/community/plugin/739237058450529919/Chroma-Colors" target="_blank">Chroma Colors</a> from the Figma extension library.</p>
           <p>3. Drag or import the downloaded file into your Figma document.</p>
           <p>4. Select the color palettes, right-click, and click on Plugins > Chroma Colors.</p>
         </div>

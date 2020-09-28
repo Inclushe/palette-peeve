@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/public/stylesheets/main.scss">
   <link rel="stylesheet" href="/public/fonts/space-grotesk.css">
-  <title>Document</title>
+  <title>Palette Peeve</title>
 </head>
 <body>
   <div id="app" @click="unsetSelectedShadeIfNotClickingShade" :class="{ 'app': true, 'app--dragging': dragged }">
@@ -66,8 +66,8 @@
         </div>
         <div>
           <div class="button-group">
-            <ui-button name="Save" action="save" :imageurl="icons['save']" keyboardshortcut="Ctrl,S" disabled="true"></ui-button>
-            <ui-button name="Load" action="load" :imageurl="icons['load']" keyboardshortcut="Ctrl,L" disabled="true"></ui-button>
+            <ui-button name="Save" action="save" :imageurl="icons['save']" keyboardshortcut="Ctrl,S" buttondisabled="true"></ui-button>
+            <ui-button name="Load" action="load" :imageurl="icons['load']" keyboardshortcut="Ctrl,L" buttondisabled="true"></ui-button>
             <ui-button name="Export" action="showSidebar" :imageurl="icons['export']" keyboardshortcut="Ctrl,Shift,E"></ui-button>
           </div>
         </div>
