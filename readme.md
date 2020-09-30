@@ -66,7 +66,7 @@ At this point, perform UX tests
     - [ ] low saturation
   - [ ] Suggest choosing inbetween values
   - [ ] Onboarding
-- [ ] Logo Design `E`
+- [X] Logo Design `E`
 - [ ] Settings `D`
   - [ ] Color Contrast
     - Black on 500
