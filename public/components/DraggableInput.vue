@@ -65,10 +65,15 @@ export default {
       },
       set: function (newValue) {
         let adjustedValue
+        console.log(this.selected)
         if (this.type === 'hue') {
-          adjustedValue = (newValue) % this.max
-          if (adjustedValue < 0) {
-            adjustedValue = 360 + adjustedValue 
+          if (this.selected) {
+            adjustedValue = Math.max(0, Math.min(newValue, 360))
+          } else {
+            adjustedValue = (newValue) % this.max
+            if (adjustedValue < 0) {
+              adjustedValue = 360 + adjustedValue 
+            }
           }
         } else {
           adjustedValue = Math.max(0, Math.min(newValue, 100))
