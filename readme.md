@@ -8,7 +8,7 @@
 
 ## Project Log
 
-- [X] UI `E`
+- [ ] UI `E`
   - [X] Design
     - [X] Undo/Redo Buttons
     - [X] Selecting
@@ -39,7 +39,6 @@
 - [X] Fix Undo/Redo `E`
   - [X] Save all actions
 - [X] Fix Drag
-- [ ] Sidebar Components
 - [ ] Export support `E`
   - [X] Mockup
   - [ ] Code
@@ -50,7 +49,24 @@
       - [ ] SASS `O`
       - [ ] Tailwind `O`
     - [ ] Illustrator `O`
-- [ ] Show/Hide text button
+- [ ] Delete/Reset
+
+---
+At this point, perform UX tests
+
+- [ ] Add different input types
+- [ ] Issues
+  - [ ] Hidden has tooltip
+  - [ ] Make hidden icon more apparent
+  - [ ] Not apparent you can copy and paste
+  - [ ] Weird NaN issue?
+  - [ ] Add warnings when editing input on
+    - [ ] hidden shade
+    - [ ] close to black/white shade
+    - [ ] low saturation
+  - [ ] Suggest choosing inbetween values
+  - [ ] Onboarding
+- [X] Logo Design `E`
 - [ ] Settings `D`
   - [ ] Color Contrast
     - Black on 500
@@ -58,47 +74,21 @@
     - Auto
     - Turn off contrast warnings (auto)
     - Show indicator for AA or AAA
-  - [ ] Different shade types `D`
-  - [ ] Add different input types `D`
-- [ ] Delete/Reset `E`
-  - [ ] Design popup
-- [X] Logo Design `E`
 - [ ] Multiselect `O`
 - [ ] Multipallete `D`
-  - Allow all palettes to be viewed at same time
-  - Update export support
 - [ ] Allow variable # of palettes `O`
-- [ ] Multiselect
-  - Element dragging/moving library?
 - [ ] Save/Load `E`
+- [ ] Make responsive
+  - [ ] Get it working on phones `O`
+- [ ] Allow UI preview to be swapped out `O`
 - [ ] Tutorial `D`
-  - [Ask users to read this or use own suggestions](https://refactoringui.com/previews/building-your-color-palette/)
+  - [Ask users to read this or use own text](https://refactoringui.com/previews/building-your-color-palette/)
   - Base color
     - Text Color Black/White/Ignore Contrast
-  - Lighter color
-    - towards local maximum hue
-  - Darker color
-    - towards local minimum hue
   - 100/900
   - 300/700
   - 200/400
   - 600/800
-- [ ] Make responsive `D`
-  - [ ] Get it working on phones
 - [ ] Select different UI types `O`
-- [ ] Welcome page `E` or Welcome screen (in app) `O`
+- [ ] Welcome page `E` or Welcome screen `O`
 - [ ] Credits `E`
-- [ ] Create Promotion Materials `E`
-  - Product Hunt?
-
-## Issues
-
-- [ ] Hidden has tooltip
-- [ ] Make hidden icon more apparent
-- [ ] Weird NaN issue?
-- [ ] Add warnings when editing input on
-  - [ ] hidden shade
-  - [ ] close to black/white shade
-  - [ ] low saturation
-- [ ] Suggest choosing inbetween values
-- [ ] Onboarding

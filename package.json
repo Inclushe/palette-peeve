@@ -15,7 +15,6 @@
     "vuex": "./node_modules/vuex/dist/vuex.js"
   },
   "dependencies": {
-    "ase-utils": "^0.1.1",
     "color-namer": "^1.4.0",
     "parcel-bundler": "^1.12.4",
     "vue": "^2.6.11",

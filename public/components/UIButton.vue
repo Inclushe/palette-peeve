@@ -9,7 +9,7 @@
 import { mapState, mapMutations } from 'vuex'
 
 export default {
-  props: ['action', 'name', 'keyboardshortcut', 'imageurl', 'activewhenselecting', 'buttondisabled', 'type', 'exporttype', 'message'],
+  props: ['action', 'name', 'keyboardshortcut', 'imageurl', 'activewhenselecting', 'buttondisabled', 'type', 'exporttype'],
   data () {
     return {}
   },
@@ -21,8 +21,6 @@ export default {
       if (this.action) {
         if (this.action === 'export') {
           this.$store.commit('exportToFile', {event: e, type: this.exporttype})
-        } else if (this.action === 'emit') {
-          this.$emit(this.message)
         } else {
           this.$store.commit(this.action)
           if (this.action === 'paste' || this.action === 'toggleVisibility') {
