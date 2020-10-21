@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 const colorNamer = require('color-namer')
+const ase = require('ase-utils')
 import tooltip from './modules/tooltip'
 import ripple from './modules/ripple'
 import HSLToRGB from './helpers/HSLToRGB'
@@ -187,6 +188,28 @@ export default new Vuex.Store({
           svgFile += '</svg>'
           event.target.href = 'data:image/svg+xml;base64,' + btoa(svgFile)
           event.target.download = `${name}FigmaColorPalette.svg`
+          break
+        case 'ase':
+          const input = {
+            'version': '1.0',
+            'groups': [],
+            'colors': []
+          }
+          var name = state.palettes[0].name
+          Object.keys(state.palettes[0]).forEach((key, index) => {
+            const object = state.palettes[0][key]
+            if (typeof object !== 'object') return
+            const RGB = HSLToRGB(object)
+            input.colors.push({
+              "name": `${name}/${key}`,
+              "model": "RGB",
+              "color": [RGB.red / 255, RGB.green / 255, RGB.blue / 255],
+              "type": "global"
+            })
+          })
+          console.log(Buffer.from(ase.encode(input)).toString('base64'))
+          event.target.href = 'data:application/ase;base64,' + Buffer.from(ase.encode(input)).toString('base64')
+          event.target.download = `${name}FigmaColorPalette.ase`
           break
         default:
           console.log('TEST')
