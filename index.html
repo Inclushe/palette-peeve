@@ -13,24 +13,25 @@
 </head>
 <body>
   <div id="app" @click="unsetSelectedShadeIfNotClickingShade" :class="{ 'app': true, 'app--dragging': dragged }">
+    <Modal></Modal>
     <Tooltip></Tooltip>
     <Ripple></Ripple>
     <div class="stage">
       <Sidebar v-if="showingSidebar"></Sidebar>
       <div class="main">
-        <div class="card" :style="{'--current-color-100': shadeToHSL(100), '--current-color-200': shadeToHSL(200), '--current-color-300': shadeToHSL(300), '--current-color-400': shadeToHSL(400), '--current-color-500': shadeToHSL(500), '--current-color-600': shadeToHSL(600), '--current-color-700': shadeToHSL(700), '--current-color-800': shadeToHSL(800), '--current-color-900': shadeToHSL(900)}">
-          <div class="card--icon">
+        <div class="modal" :style="{'--current-color-100': shadeToHSL(100), '--current-color-200': shadeToHSL(200), '--current-color-300': shadeToHSL(300), '--current-color-400': shadeToHSL(400), '--current-color-500': shadeToHSL(500), '--current-color-600': shadeToHSL(600), '--current-color-700': shadeToHSL(700), '--current-color-800': shadeToHSL(800), '--current-color-900': shadeToHSL(900)}">
+          <div class="modal--icon">
             <svg id="book" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M2 3.993A1 1 0 0 1 2.992 3h18.016c.548 0 .992.445.992.993v16.014a1 1 0 0 1-.992.993H2.992A.993.993 0 0 1 2 20.007V3.993zM4 5v2h2V5H4zm14 0v2h2V5h-2zM4 9v2h2V9H4zm14 0v2h2V9h-2zM4 13v2h2v-2H4zm14 0v2h2v-2h-2zM4 17v2h2v-2H4zm14 0v2h2v-2h-2z"/></svg>   
           </div>
           <h1>The series of the century is going <span class="underline">back to basics.</span></h1>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ut tincidunt nulla, eget tempor sapien. In velit ligula, dignissim sit amet lacus eu, bibendum laoreet erat. Aliquam scelerisque venenatis odio eget cursus. Aenean nec libero vestibulum, rhoncus elit nec, hendrerit libero.</p>
-          <div class="mock-button-container">
-            <a href="#" class="mock-button mock-button--secondary" role="button">Learn More</a>
-            <a href="#" class="mock-button mock-button--primary" role="button">Purchase</a>
+          <div class="modal-button-container">
+            <a href="#" class="modal-button modal-button--secondary" role="button">Learn More</a>
+            <a href="#" class="modal-button modal-button--primary" role="button">Purchase</a>
           </div>
-          <div class="mock-button-container">
-            <a href="#" class="mock-button mock-button--secondary mock-button--hover" role="button">Learn More</a>
-            <a href="#" class="mock-button mock-button--primary mock-button--hover" role="button">Purchase</a>
+          <div class="modal-button-container">
+            <a href="#" class="modal-button modal-button--secondary modal-button--hover" role="button">Learn More</a>
+            <a href="#" class="modal-button modal-button--primary modal-button--hover" role="button">Purchase</a>
           </div>
         </div>
         <div class="palette" v-on:click.stop>

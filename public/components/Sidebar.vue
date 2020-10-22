@@ -5,7 +5,14 @@
       <ui-button name="Hide Sidebar" action="hideSidebar" :imageurl="icons['close']" type="mini"></ui-button>
     </header>
     <div class="sidebar--contents">
-      <SidebarDropdown action="export" exporttype="figma" id="figma">
+      <SidebarSection action="export" exporttype="scss" id="scss">
+        <template v-slot:title>SCSS</template>
+        <template v-slot:description>
+          <p>1. Click download.</p>
+          <p>2. Copy and paste the code into your .scss file.</p>
+        </template>
+      </SidebarSection>
+      <SidebarSection action="export" exporttype="figma" id="figma">
         <template v-slot:title>Figma</template>
         <template v-slot:description>
           <p>1. Download the file.</p>
@@ -13,14 +20,14 @@
           <p>3. Drag or import the downloaded file into your Figma document.</p>
           <p>4. Select the color palettes, right-click, and click on Plugins > Chroma Colors.</p>
         </template>
-      </SidebarDropdown>
-      <SidebarDropdown action="export" exporttype="ase" id="ase">
+      </SidebarSection>
+      <SidebarSection action="export" exporttype="ase" id="ase">
         <template v-slot:title>Adobe .ase</template>
         <template v-slot:description>
           <p>1. Download the file.</p>
           <p>2. In Illustrator, from the Swatches window, click on the Swatches Library menu dropdown button, click Other Library..., and find the downloaded file.</p>
         </template>
-      </SidebarDropdown>
+      </SidebarSection>
     </div>
   </div>
 </template>
@@ -28,7 +35,7 @@
 <script>
 import { mapMutations } from 'vuex'
 import UIButton from './UIButton'
-import SidebarDropdown from './SidebarDropdown'
+import SidebarSection from './SidebarSection'
 import icons from './../images/icons/*.svg'
 
 export default {
@@ -44,7 +51,7 @@ export default {
   },
   components: {
     'ui-button': UIButton,
-    SidebarDropdown
+    SidebarSection
   }
 }
 </script>

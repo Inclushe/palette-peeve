@@ -6,6 +6,7 @@ import UIButton from './../components/UIButton'
 import Tooltip from './../components/Tooltip'
 import Ripple from './../components/Ripple'
 import Sidebar from './../components/Sidebar'
+import Modal from './../components/Modal'
 import icons from './../images/icons/*.svg'
 
 const app = new Vue({
@@ -61,7 +62,8 @@ const app = new Vue({
     'ui-button': UIButton,
     Tooltip,
     Ripple,
-    Sidebar
+    Sidebar,
+    Modal
   },
   mounted () {
     this.$store.commit('saveUndoState')

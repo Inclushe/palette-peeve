@@ -39,17 +39,18 @@
 - [X] Fix Undo/Redo `E`
   - [X] Save all actions
 - [X] Fix Drag
-- [ ] Sidebar Components
+- [X] Sidebar Components
 - [ ] Export support `E`
   - [X] Mockup
   - [ ] Code
     - [X] Figma `E`
     - [ ] CSS `D`
+      - [ ] Modal with Code Block
       - [ ] Varibles `D`
       - [ ] SCSS `O`
       - [ ] SASS `O`
       - [ ] Tailwind `O`
-    - [ ] Illustrator `O`
+    - [X] Illustrator `O`
 - [ ] Show/Hide text button
 - [ ] Settings `D`
   - [ ] Color Contrast

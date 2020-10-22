@@ -34,11 +34,6 @@ export default {
       console.log(this.expanded)
     }
   },
-  watch: {
-    message (newMessage) {
-      this[newMessage]()
-    }
-  },
   components: {
     'ui-button': UIButton
   }

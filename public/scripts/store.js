@@ -4,6 +4,7 @@ const colorNamer = require('color-namer')
 const ase = require('ase-utils')
 import tooltip from './modules/tooltip'
 import ripple from './modules/ripple'
+import modal from './modules/modal'
 import HSLToRGB from './helpers/HSLToRGB'
 
 Vue.use(Vuex)
@@ -11,7 +12,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   modules: {
     tooltip,
-    ripple
+    ripple,
+    modal
   },
   state: {
     palettes: [
@@ -210,6 +212,20 @@ export default new Vuex.Store({
           console.log(Buffer.from(ase.encode(input)).toString('base64'))
           event.target.href = 'data:application/ase;base64,' + Buffer.from(ase.encode(input)).toString('base64')
           event.target.download = `${name}FigmaColorPalette.ase`
+          break
+        case 'scss':
+          let generatedCode = ''
+          var name = state.palettes[0].name
+          Object.keys(state.palettes[0]).forEach((key, index) => {
+            const object = state.palettes[0][key]
+            if (typeof object !== 'object') return
+            generatedCode += `\$${name}${key}: hsl(${object.hue}, ${object.saturation}%, ${object.lightness}%);\n`
+          })
+          this.commit('setModalTitle', 'Here\'s the SCSS.')
+          this.commit('setModalDescription', 'Copy and paste into your editor of choice.')
+          this.commit('setModalCode', generatedCode)
+          this.commit('setModalHasSecondaryButton', true)
+          this.commit('showModal')
           break
         default:
           console.log('TEST')

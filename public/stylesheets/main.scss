@@ -37,7 +37,19 @@ h1, h2, h3, h4, h5, h6, a, p, ol {
   font-size: 1rem;
 }
 
-.card {
+textarea.code-textarea {
+  background: $gray200;
+  padding: 1rem;
+  height: 16rem;
+  width: 100%;
+  overflow-y: scroll;
+  box-sizing: border-box;
+  resize: none;
+  border: none;
+  font: $shadeFont;
+}
+
+.modal {
   --current-color-100: #EEF0F6;
   --current-color-200: #DCDFEA;
   --current-color-300: #C8CDDA;
@@ -63,6 +75,17 @@ h1, h2, h3, h4, h5, h6, a, p, ol {
       fill: var(--current-color-600);
     }
   }
+  &--popup {
+    width: 48rem;
+  }
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    a.button {
+      // margin: -0.25rem;
+    }
+  }
   h1 {
     margin-top: 1rem;
     color: var(--current-color-900);
@@ -75,11 +98,11 @@ h1, h2, h3, h4, h5, h6, a, p, ol {
     line-height: 150%;
     color: var(--current-color-800);
   }
-  .mock-button-container {
+  .modal-button-container {
     margin-top: 2rem;
     display: flex;
     justify-content: flex-end;
-    a.mock-button {
+    a.modal-button {
       margin-left: 1rem;
     }
   }
@@ -90,8 +113,10 @@ h1, h2, h3, h4, h5, h6, a, p, ol {
   }
 }
 
-a.mock-button {
-  display: block;
+a.modal-button {
+  display: flex;
+  justify-content: center;
+  // align-items: baseline;
   padding: 0.75rem 1.5rem 0.625em;
   border-radius: 0.25rem;
   background: var(--current-color-200);
@@ -99,15 +124,21 @@ a.mock-button {
   font-weight: 600;
   text-decoration: none;
   transition: background ease-in-out 50ms, color ease-in-out 50ms;
+  img {
+    // vertical-align: center;
+    height: 1rem;
+    width: 1rem;
+    margin-right: 0.5rem;
+  }
   &--primary {
     background: var(--current-color-500);
     color: black;
-    &.mock-button--hover, &:hover {
+    &.modal-button--hover, &:hover {
       background: var(--current-color-400);
     }
   }
   &--secondary {
-    &.mock-button--hover, &:hover {
+    &.modal-button--hover, &:hover {
       color: var(--current-color-600);
     }
   }
@@ -352,6 +383,11 @@ a.button {
     span {
       display: none;
     }
+    img {
+      margin: -0.25rem;
+      height: 2rem;
+      width: 2rem;
+    }
   }
   &--disabled {
     cursor: not-allowed;
@@ -368,7 +404,7 @@ a.button {
   position: absolute;
   display: flex;
   flex-direction: column;
-  padding: 0.75rem 1rem;
+  padding: 0.75rem 1rem 0.5rem;
   background: $gray900;
   color: white;
   border-radius: 0.5rem;
@@ -377,7 +413,7 @@ a.button {
   gap: 0.5rem;
   opacity: 0;
   transition: opacity ease-in-out 50ms;
-  z-index: 1;
+  z-index: 3;
   pointer-events: none;
   &:after {
     content: '';
@@ -390,6 +426,7 @@ a.button {
     border-bottom: 0.5rem solid transparent;
   }
   &--keyboard {
+    margin-bottom: 0.25rem;
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -410,7 +447,7 @@ a.button {
   border-radius: 99rem;
   pointer-events: none;
   opacity: 0;
-  z-index: 1;
+  z-index: 3;
   transition: opacity ease-in-out 100ms, transform ease-out 50ms, background ease-out 50ms;
   transform: scale(1);
   &--active {
@@ -463,11 +500,6 @@ a.button {
       font-size: 2rem;
       font-weight: 500;
     }
-    img {
-      margin: -0.25rem;
-      height: 2rem;
-      width: 2rem;
-    }
   }
   &--contents {
     margin-top: 1.5rem;
@@ -509,4 +541,19 @@ a.button {
       }
     }
   }
+}
+
+.overlay {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 2;
 }
